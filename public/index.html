@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WebAppMaker">
+
+
+<head>
+
+    <link href="stylesheets/bootswatch/_bootswatch.scss" rel="stylesheet"/>
+    <link href="stylesheets/bootswatch/bootstrap.css" rel="stylesheet"/>
+
+    <link href="stylesheets/style.css" rel="stylesheet"/>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/jquery-ui.js"></script>
+    <script src="javascripts/angular.min.js"></script>
+    <script src="javascripts/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!-- Directives -->
+    <!--<script src="directives/jga-directives.js"></script>-->
+
+    <!-- controllers -->
+    <script src="controllers/welcome.controller.js"></script>
+    <script src="controllers/users/login.controller.js"></script>
+    <script src="controllers/users/register.controller.js"></script>
+    <script src="controllers/users/profile.controller.js"></script>
+    <script src="controllers/users/home.controller.js"></script>
+    <script src="controllers/users/history.controller.js"></script>
+
+    <script src="controllers/products/product.new.controller.js"></script>
+    <script src="controllers/products/product.view.controller.js"></script>
+
+
+
+    <!-- services -->
+    <script src="services/user.service.client.js"></script>
+    <script src="services/product.service.client.js"></script>
+    <script src="services/review.service.client.js"></script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <title>Web Dev Course Home Page</title>
+
+</head>
+<body>
+
+
+<div ng-view></div>
+
+</body>
+
+</html>

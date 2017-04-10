@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+.background {
+  /*margin: 0;*/
+  background: url('http://whd.erth.biz/wp-content/uploads/mixed/Ice-plants-abstract-white-4k--high-resolution.jpg');
+  /*background-size: 1440px 800px;*/
+  /*background-repeat:no-repeat;*/
+  /*display: compact;*/
+  repeat: center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: -100;
+}
+
+.home {
+  text-align: center;
+  align: center;
+  display: inline-block;
+  float: none;
+}
+
+.loginPic {
+  width: 80%;
+}
+
+.alert {
+  opacity: 0.5;
+}
