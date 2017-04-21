@@ -48,6 +48,7 @@ function findProductById(pid) {
     var deferred = q.defer();
     productModel.findOne({'_id': pid})
         .populate('reviews')
+        .populate('seller')
         .exec(function(error, product) {
             if(product) {
                 deferred.resolve(product);

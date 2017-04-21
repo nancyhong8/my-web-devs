@@ -30,7 +30,7 @@ module.exports = function(app) {
     app.get("/api/products/:uid", checkSameUser, findProductsByUser);
     app.put("/api/user/:uid/add-product", checkSameUser, addToCart);
     app.get("/api/user/find/:uid", findUserById);
-    app.put("/api/user/remove/cart/:uid", removeFromCart);
+    // app.put("/api/user/remove/cart/:uid", removeFromCart);
 
     // app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     //
@@ -168,6 +168,7 @@ module.exports = function(app) {
             .then(function (user) {
                 res.sendStatus(200);
             }, function (err) {
+                res.sendStatus(404);
                 console.log(err);
             })
     }
@@ -271,17 +272,17 @@ module.exports = function(app) {
                 console.log(err);
             })
     }
-
-    function removeFromCart(req, res) {
-        var uid = req.params['uid'];
-        var product = req.body;
-        userModel.removeFromCart(uid, product)
-            .then(function(result) {
-                res.sendStatus(200);
-            }, function(error) {
-                res.sendStatus(404);
-            })
-    }
+    //
+    // function removeFromCart(req, res) {
+    //     var uid = req.params['uid'];
+    //     var product = req.body;
+    //     userModel.removeFromCart(uid, product)
+    //         .then(function(result) {
+    //             res.sendStatus(200);
+    //         }, function(error) {
+    //             res.sendStatus(404);
+    //         })
+    // }
 
 
 

@@ -14,6 +14,8 @@
         vm.createProduct = createProduct;
         vm.viewProduct = viewProduct;
         vm.remove = remove;
+        vm.checkout = checkout;
+        var products;
 
 
         function init() {
@@ -25,7 +27,8 @@
                     if(vm.user.cart.length < 1) {
                         vm.noProducts = "There are no products in your cart";
                     }
-                    createProductMap(vm.user.cart);
+                    products = vm.user.cart;
+                    createProductMap(products);
 
                 }, function(err) {
                     console.log(err)
@@ -54,9 +57,6 @@
                     }
                 }
             }
-            //vm.products = productMap;
-            console.log(vm.products)
-
         }
 
 
@@ -65,10 +65,11 @@
             $location.url("/user/" + userId + "/product/" + pid);
         }
         function remove(product) {
-            UserService.removeFromCart(userId, product)
-                .then(function(result) {
-                    console.log('reach remove')
-                    $location.url("/user/" + userId + "/cart")
+            vm.user.cart.splice(vm.user.cart.indexOf(product), 1);
+            var promise = UserService.updateUser(userId, vm.user);
+            promise
+                .then(function(user) {
+                    init();
                 }, function(error) {
                     console.log(error);
                 })
@@ -95,6 +96,20 @@
         }
         function history() {
             $location.url("/user/" + userId + "/history");
+        }
+        function checkout() {
+            for(i = 0; i < products.length; i ++) {
+                vm.user.productBought.push(products[i]);
+            }
+            vm.user.cart = [];
+            var promise = UserService.updateMe(userId, vm.user);
+            promise
+                .then(function(result) {
+                    $location.url("/user/" + userId + "/history");
+                }, function(error) {
+                    console.log(error);
+                })
+
         }
 
     }

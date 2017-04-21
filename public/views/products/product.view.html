@@ -53,9 +53,16 @@
             <a ng-click="model.writeReview()"
                class="btn btn-primary btn-block">Review Product</a>
         </div>
+
         <div>
             <h3>Product Description</h3>
             {{model.product.description}}
+        </div>
+        <div>
+            Seller:
+            <a ng-click="model.viewUser(model.product.seller._id)">
+                 {{model.product.seller.firstName}} {{model.product.seller.lastName}}
+            </a>
         </div>
         <div>
             </br>

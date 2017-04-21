@@ -1,68 +1,56 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a ng-click="model.home()" class="navbar-brand">Home</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a ng-click="model.profile()">Profile <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="model.newest()">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-click="model.welcome()">Logout</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<h1>Hi {{model.user.firstName}}!</h1>
-<h3>Below is your purchasing history</h3>
+<h3>Hi {{model.user.firstName}}, below is your purchasing history</h3>
 
 <div class="container-fluid">
+    <div ng-show="model.noProducts">
+        {{model.noProducts}}
+    </div>
 
     <div ng-repeat="product in model.products">
         <table>
-            <tbody>
             <tr>
+
+
                 <td>
-                    <a ng-click="model.productView(product._id)">{{product.name}}</a>
+                    <img ng-src="{{product.url}}" width="80%" height="130px"/>
                 </td>
-                <td class="right-side-glyphicon">
-                    <!--<a ng-click="model.editPage(page._id)">-->
-                    <!--<span class="glyphicon glyphicon-cog"></span>-->
-                    <!--</a>-->
+                <td>
+                    <a ng-click="model.viewProduct(product)">{{product.name}} </a>
+
+                </td>
+                <td>
+                    Price: ${{product.price}}
+                </td>
+                <td>
+                    Quantity: {{product.quantity}}
+                </td>
+
+                <td>
+                    <button ng-click="model.review(product)" type="reset" class="btn btn-default btn-block">Review</button>
+                    <button ng-click="model.contactSeller(product)" class="btn btn-default btn-block">Contact Seller</button>
+                    <button ng-click="model.remove(product)" ng-show="model.user.roles.includes('ADMIN')" class="btn btn-danger btn-block">Delete</button>
                 </td>
             </tr>
-            </tbody>
         </table>
     </div>
-
 </div>
 
 

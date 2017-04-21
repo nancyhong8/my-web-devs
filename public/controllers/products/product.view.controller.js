@@ -16,6 +16,7 @@
         vm.addToCart = addToCart;
         vm.cart = cart;
         vm.editProduct = editProduct;
+        vm.viewUser = viewUser;
 
         function init() {
             var promise = ProductService.findProductById(pid);
@@ -118,6 +119,9 @@
 
         function cart() {
             $location.url("/user/" + uid + "/cart");
+        }
+        function viewUser(uid) {
+            $location.url("/user/" + uid + "/view");
         }
 
     }

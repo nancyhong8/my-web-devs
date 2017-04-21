@@ -28,6 +28,19 @@
                     currentUser: checkLogin
                 }
             })
+            .when("/user/:uid/inbox", {
+                templateUrl: "views/users/inbox.view.html",
+                controller: "inboxController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkLogin
+                }
+            })
+            .when("/user/:uid/view", {
+                templateUrl: "views/users/user.view.html",
+                controller: "userViewController",
+                controllerAs: "model"
+            })
             .when("/admin/all", {
                 templateUrl: "views/users/admin.view.html",
                 controller: "adminController",

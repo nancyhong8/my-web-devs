@@ -36,6 +36,7 @@
             return $http.delete("/api/product/delete/" + pid);
         }
 
+
         // function findUserByCredentials(email, password) {
         //     return $http.get("/api/user?email="+email+"&password="+password);
         //

@@ -8,51 +8,90 @@
         var userId = $routeParams["uid"];
 
         vm.home = home;
-        vm.welcome = welcome;
+        vm.logout = logout;
         vm.profile = profile;
-        vm.productView = productView;
+        vm.history = history;
+        vm.viewProduct = viewProduct;
+        vm.review = review;
+        vm.remove = remove;
+        var products;
 
 
         function init() {
-            var promise = UserService.findUserById(userId);
-            promise
+            // This allows me to get the product objects in the user's
+            // cart rather than just the product id
+            var promise = UserService.findUserById(userId)
                 .then(function(user) {
                     vm.user = user.data;
-                }, function(err) {
-                    console.log(err);
-                })
-            var promise2 = UserService.findProductsByUser(userId);
-            promise2
-                .then(function(products) {
-                    vm.products = products.data;
+                    if(vm.user.productBought.length < 1) {
+                        vm.noProducts = "There are no products in your cart";
+                    }
+                    products = vm.user.productBought;
+                    console.log(products);
+                    createProductMap(products);
+
                 }, function(err) {
                     console.log(err)
                 })
         }
         init();
 
-
-        function home() {
-            $location.url("/page/home/" + userId);
+        // Maps the product to the amount selected
+        function createProductMap(products) {
+            var  productMap = {};
+            vm.products = [];
+            for(i = 0; i < products.length; i++) {
+                if(productMap[products[i].name]) {
+                    productMap[products[i].name] = productMap[products[i].name] + 1;
+                }
+                else {
+                    productMap[products[i].name] = 1;
+                }
+            }
+            for(var key in productMap) {
+                for(i = 0; i < products.length; i++) {
+                    if(products[i].name == key) {
+                        products[i].quantity = productMap[key];
+                        vm.products.push(products[i]);
+                        break;
+                    }
+                }
+            }
         }
 
-        function welcome() {
-            $location.url("/welcome");
+
+
+        function viewProduct(pid) {
+            $location.url("/user/" + userId + "/product/" + pid);
         }
 
+        function logout() {
+            var promise = UserService.logout();
+            promise
+                .then(function(result) {
+                    $rootScope.currentUser = null;
+                    $location.url("/welcome");
+                }, function(error) {
+                    console.log(error);
+                })
+        }
         function profile() {
             $location.url("/user/" + userId);
         }
-        function productView(pid) {
-            console.log(pid);
-            var promise = UserService.findProductById(pid);
+        function home() {
+            $location.url("/user/" + userId + "/home");
+        }
+        function review(product) {
+            $location.url("/user/" + userId + "/product/" + product._id + "/review")
+        }
+        function remove(product) {
+            vm.user.productBought.splice(vm.user.productBought.indexOf(product), 1);
+            var promise = UserService.updateUser(userId, vm.user);
             promise
-                .then(function(product) {
-                    console.log("FOUND THE PRODUCT");
-                    console.log(product.data);
-                    $location.url("/product/view/" + pid);
-                }, function(err) {
-
+                .then(function(user) {
+                    init();
+                }, function(error) {
+                    console.log(error);
                 })
         }
 

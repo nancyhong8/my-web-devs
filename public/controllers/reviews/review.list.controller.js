@@ -23,6 +23,7 @@
                     if(vm.reviews.length < 1) {
                         vm.noReviews = "There are no reviews for this product";
                     }
+                    console.log(vm.reviews);
                 }, function(error) {
                     console.log(error);
                 })

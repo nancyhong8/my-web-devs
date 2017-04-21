@@ -12,10 +12,12 @@
             "loggedIn": loggedIn,
             "logout": logout,
             "findProductsByUser": findProductsByUser,
-            "removeFromCart": removeFromCart,
+            // "removeFromCart": removeFromCart,
             "isAdmin": isAdmin,
             "findAllUsers": findAllUsers,
             "deleteUser": deleteUser,
+            "updateMe": updateMe,
+            "deleteMe": deleteMe,
 
 
             // "findUserByUsername": findUserByUsername,
@@ -44,9 +46,9 @@
         function logout() {
             return $http.post("/api/logout");
         }
-        function removeFromCart(uid, product) {
-            return $http.put("/api/user/remove/cart/" + uid, product);
-        }
+        // function removeFromCart(uid, product) {
+        //     return $http.put("/api/user/remove/cart/" + uid, product);
+        // }
         function isAdmin() {
             return $http.post("/api/isAdmin");
         }
@@ -55,6 +57,9 @@
         }
         function deleteUser(uid) {
             return $http.delete("/api/user/admin/" + uid);
+        }
+        function deleteMe(uid) {
+            return $http.delete("/api/user/" + uid + "/delete");
         }
 
 
@@ -77,7 +82,10 @@
         function findProductById(productId) {
             return $http.get("/api/product/view/" + productId);
         }
-        //
+
+        function updateMe(uid, user) {
+            return $http.put("/api/user/" + uid, user);
+        }
         // function findUserByUsername(username) {
         //     return $http.get("/api/user?username="+username);
         // }

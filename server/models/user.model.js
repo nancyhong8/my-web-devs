@@ -42,6 +42,7 @@ function findUserById(userId) {
     userModel.findById(userId, function(err, user) {
     })
         .populate('cart')
+        .populate('productBought')
         .exec(function(error, user) {
         if(user) {
             deferred.resolve(user);
@@ -53,6 +54,9 @@ function findUserById(userId) {
 function updateUser(userId, user) {
     var deferred = q.defer();
     userModel.update({'_id': userId}, {$set: {
+        'cart': user.cart,
+        'productBought': user.productBought,
+        'productSelling': user.productSelling,
         'username': user.username,
         'password': user.password,
         'email': user.email,
@@ -79,19 +83,19 @@ function addToCart(userId, product) {
     return deferred.promise;
 }
 
-function removeFromCart(uid, product) {
-    var deferred = q.defer();
-    userModel.findByIdAndUpdate(uid,
-        {$pull: {"cart": product._id}},
-        {safe: true, upsert: true, new: true},
-        function(err, result) {
-            if(result) {
-                deferred.resolve(result);
-            }
-        }
-    )
-    return deferred.promise;
-}
+// function removeFromCart(uid, product) {
+//     var deferred = q.defer();
+//     userModel.findByIdAndUpdate(uid,
+//         {$pull: {"cart": product._id}},
+//         {safe: true, upsert: true, new: true},
+//         function(err, result) {
+//             if(result) {
+//                 deferred.resolve(result);
+//             }
+//         }
+//     )
+//     return deferred.promise;
+// }
 
 function findAllUsers() {
     var deferred = q.defer();
@@ -118,9 +122,13 @@ function findAllUsers() {
 
 function deleteUser(uid) {
     var deferred = q.defer();
-
     userModel.findByIdAndRemove(uid, function(err, user) {
-        deferred.resolve(user);
+        if(user) {
+            deferred.resolve(user);
+        }
+        else {
+            console.log(err);
+        }
     });
     return deferred.promise;
 }
@@ -146,13 +154,12 @@ userModel.findUserById = findUserById;
 userModel.updateUser = updateUser;
 userModel.addToCart = addToCart;
 userModel.findUserByGoogleId = findUserByGoogleId;
-userModel.removeFromCart = removeFromCart;
+// userModel.removeFromCart = removeFromCart;
 userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
 // userModel.findUserByUsername = findUserByUsername;
-// userModel.deleteUser = deleteUser;
 
 
 module.exports = userModel;

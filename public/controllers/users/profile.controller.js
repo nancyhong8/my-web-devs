@@ -6,7 +6,6 @@
     function profileController(currentUser, $location, $routeParams, UserService, $rootScope) {
         var vm = this;
         var userId = $routeParams["uid"];
-
         vm.home = home;
         vm.update = update;
         vm.logout = logout;
@@ -15,6 +14,7 @@
         vm.cartSize = vm.user.cart.length;
         vm.cart = cart;
         vm.deleteUser = deleteUser;
+        vm.inbox = inbox;
 
         // updates user
         function update() {
@@ -57,12 +57,16 @@
             $location.url("/user/" + userId + "/cart");
         }
         function deleteUser() {
-            // UserService.deleteMe(userId)
-            //     .then(function(result) {
-            //         $location.url("/welcome");
-            //     }, function(error) {
-            //         console.log(error);
-            //     })
+            UserService.deleteMe(userId)
+                .then(function(result) {
+                    logout();
+                    $location.url("/welcome");
+                }, function(error) {
+                    console.log(error);
+                })
+        }
+        function inbox() {
+            $location.url("/user/" + userId + "/inbox");
         }
     }
 })();

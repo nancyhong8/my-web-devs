@@ -12,6 +12,7 @@
         vm.product = {};
         vm.product.seller = uid;
         vm.home = home;
+        var user;
 
         vm.logout = logout;
         vm.profile = profile;
@@ -21,7 +22,8 @@
             var promise = UserService.findUserById(uid);
             promise
                 .then(function(user) {
-                    vm.cartSize = user.data.cart.length;
+                    user = user.data;
+                    vm.cartSize = user.cart.length;
                 })
         }
         init();
@@ -50,6 +52,11 @@
             var promise = ProductService.createProduct(vm.product);
             promise
                 .then(function(product) {
+                    user.productSelling.push(product);
+                    console.log(user.productSelling);
+                    UserService.updateUser(user, function(err, user) {
+                        if(err) console.log(err);
+                    })
                     $location.url("/page/home/" + uid);
                 }, function(err) {
                     console.log(err);
