@@ -29,13 +29,13 @@ function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
 }
 
-function findUserByCredentials(username, password) {
-    var deferred = q.defer();
-    userModel.findOne({'username': username, 'password': password}, function(err, user) {
-        deferred.resolve(user);
-    });
-    return deferred.promise;
-}
+// function findUserByCredentials(username, password) {
+//     var deferred = q.defer();
+//     userModel.findOne({'username': username, 'password': password}, function(err, user) {
+//         deferred.resolve(user);
+//     });
+//     return deferred.promise;
+// }
 
 function findUserById(userId) {
     var deferred = q.defer();
@@ -128,9 +128,20 @@ function deleteUser(uid) {
 function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id': facebookId});
 }
+function findUserByUsername(username) {
+    var deferred = q.defer();
+    userModel.findOne({"username": username},
+        function(err, user) {
+            if(user) {
+                deferred.resolve(user);
+            }
+        }
+    )
+    return deferred.promise
+}
 
 userModel.createUser = createUser;
-userModel.findUserByCredentials = findUserByCredentials;
+// userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserById = findUserById;
 userModel.updateUser = updateUser;
 userModel.addToCart = addToCart;
@@ -139,6 +150,7 @@ userModel.removeFromCart = removeFromCart;
 userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.findUserByUsername = findUserByUsername;
 // userModel.findUserByUsername = findUserByUsername;
 // userModel.deleteUser = deleteUser;
 

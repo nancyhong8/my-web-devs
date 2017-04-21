@@ -7,14 +7,14 @@ module.exports = function(app) {
     var productModel = require('../models/product.model.js');
     var bcrypt = require("bcrypt-nodejs");
     var LocalStrategy = require('passport-local').Strategy;
-    // var FacebookStrategy = require('passport-facebook').Strategy;
-    //
-    // app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    // app.get('/auth/facebook/callback',
-    //     passport.authenticate('facebook', {
-    //         successRedirect: '/#/user',
-    //         failureRedirect: '/#/user/login'
-    //     }));
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/#/user',
+            failureRedirect: '/#/user/login'
+        }));
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get   ('/api/loggedIn', loggedin);
@@ -45,6 +45,43 @@ module.exports = function(app) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+    var facebookConfig = {
+        clientID     : "283364938783133",
+        clientSecret : "67049bb851f6a98b5da5385313932b24",
+        callbackURL  : "http://localhost:3500/auth/facebook/callback"
+    };
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        developerModel
+            .findUserByFacebookId(profile.id)
+            .then(function(user) {
+                if(user) {
+                    return done(null, user);
+                }
+                else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newFacebookUser = {
+                        username: emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        email: email,
+                        facebook: {
+                            id: profile.id,
+                            token: token
+                        }
+                    }
+                    return userModel.createUser(newFacebookUser)
+                }
+            }, function(error) {
+                if(error) {
+                    return done(error);
+                }
+            })
+    }
+
 
     // var googleConfig = {
     //     clientID     : process.env.GOOGLE_CLIENT_ID_SPRING_2017,
@@ -56,17 +93,16 @@ module.exports = function(app) {
 
 
     function localStrategy(username, password, done) {
-        userModel
-            .findUserByCredentials(username, password)
-            .then(
-                function(user) {
-                    if (!user) { return done(null, false); }
+
+        userModel.findUserByUsername(username)
+            .then(function(user) {
+                if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
-                },
-                function(err) {
-                    if (err) { return done(err); }
                 }
-            );
+                else {
+                    return done(null, false);
+                }
+            })
     }
     // function googleStrategy(token, refreshToken, profile, done) {
     //     userModel
@@ -159,6 +195,7 @@ module.exports = function(app) {
 
     function register(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
 
         // user.password = bcrypt.hashSync(user.password);
         userModel.createUser(user)
@@ -183,19 +220,7 @@ module.exports = function(app) {
     }
 
     function login(req, res) {
-
-        // userModel.findUserByUsername(username)
-        //     .then(function(user) {
-        //         if(user && bcrypt.compareSync(password, user.password)) {
-        //             return done(null, user);
-        //         }
-        //         else {
-        //             return done(null, false);
-        //         }
-        //     })
         var user = req.user;
-        console.log('reached user from login');
-        console.log(user);
         res.json(user);
     }
 
