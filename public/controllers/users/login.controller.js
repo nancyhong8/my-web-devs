@@ -7,17 +7,15 @@
         var vm = this;
         vm.login = login;
         vm.welcome = welcome;
-        vm.forgot = forgot;
         vm.user = {};
 
 
         function login() {
-            console.log("from login controller vm.user");
             console.log(vm.user);
-            var promise = UserService.findUserByCredentials(vm.user.email, vm.user.password);
+            var promise = UserService.login(vm.user);
             promise
                 .then(function(user) {
-                    $location.url("/page/home/" + user.data._id);
+                    $location.url("/user/" + user.data._id + "/home");
                 }, function(err) {
                     vm.error = "Login credentials not found";
                 })
@@ -26,8 +24,6 @@
             console.log(vm.user);
             $location.url("/welcome");
         }
-        function forgot() {
 
-        }
     }
 })();

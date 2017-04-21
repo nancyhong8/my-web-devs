@@ -4,7 +4,7 @@ module.exports = function(app) {
 
     app.post("/api/product", createProduct);
     app.get("/api/product/view/:pid", findProductById);
-
+    app.delete("/api/product/delete/:pid", deleteProduct);
     // app.get("/api/user", findUserByCredentials);
     // app.get("/api/user/:uid", findUserById);
     // app.put("/api/user/:uid", updateUser);
@@ -13,41 +13,64 @@ module.exports = function(app) {
 
     var productModel = require('../models/product.model.js');
 
-    var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: __dirname+'/../../public/uploads' });
-    app.post("/api/upload", upload.single('myFile'), uploadImage);
 
+
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/resources/uploads' });
+   // app.post("/api/upload",  uploadImage);
+    app.post("/api/upload", upload.single("myFile"), uploadImage)
+    app.post("/api/upload/edit", upload.single("myFile"), changeImage);
+
+    function changeImage(req, res) {
+        var filename = req.file.filename;
+        var id = req.body.id;
+        var name = req.body.name;
+        var quantity = req.body.quantity;
+        var seller = req.body.seller;
+        var price = req.body.price;
+        var description = req.body.description;
+        product = {
+            '_id': id,
+            'name': name,
+            'quantity': quantity,
+            'seller': seller,
+            'description': description,
+            'price': price,
+            'url' : '/resources/uploads/' + filename
+        }
+
+        productModel.editProduct(product)
+            .then(function(product) {
+                res.redirect("/#!\/user\/" + seller + "\/home");
+            }, function(error) {
+                console.log(error);
+            })
+    }
 
     function uploadImage(req, res) {
-        console.log("reached server");
-        var id            = req.body.id;
-        var name          = req.body.name;
-        var quantity      = req.body.quantity;
-        var description   = req.body.description;
-        var seller        = req.body.seller;
-        var myFile        = req.file;
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        var filename = req.file.filename;
+        var name = req.body.name;
+        var quantity = req.body.quantity;
+        var seller = req.body.seller;
+        var price = req.body.price;
+        var description = req.body.description;
+        product = {
+            'name': name,
+            'quantity': quantity,
+            'seller': seller,
+            'description': description,
+            'price': price,
+            'url' : '/resources/uploads/' + filename
+        }
 
-        // var url = '/assignment/#!\/user\/'+userId+'\/website\/'+websiteId+'\/page\/'+pageId+'\/widget\/';
-        var product = {
-            "name": name,
-            "quantity": quantity,
-            "desription": description,
-            "seller": seller,
-            "_id": id,
-            "url": "/uploads/" + filename};
-        productModel.uploadPicture(product)
+        productModel.createProduct(product)
             .then(function(product) {
-                res.send(product);
-            }, function(err) {
-                console.log(err);
-            })
-        // res.redirect(url);
+                res.redirect("/#!\/user\/" + seller + "\/home");
+            }),function(err) {
+            console.log(err);
+        }
     }
+
     function createProduct(req, res) {
         var product = req.body;
         productModel.createProduct(product)
@@ -62,80 +85,21 @@ module.exports = function(app) {
         var pid = req.params['pid'];
         productModel.findProductById(pid)
             .then(function(product) {
-                console.log("froms erver");
-                console.log(product);
                 res.send(product);
             }, function(err) {
                 console.log(err);
             })
     }
-    //
-    // function findUserByCredentials(req, res) {
-    //     var email = req.query.email;
-    //     var password = req.query.password;
-    //
-    //     userModel.findUserByCredentials(email, password)
-    //         .then(function(user) {
-    //             if(user) {
-    //                 res.send(user);
-    //             }
-    //             else {
-    //                 res.sendStatus(404);
-    //             }
-    //         },function(err) {
-    //             res.sendStatus(500);
-    //         })
-    // }
-    //
-    // function findUserById(req, res) {
-    //     var userId = req.params['uid'];
-    //     userModel.findUserById(userId)
-    //         .then(function(user) {
-    //             res.send(user);
-    //         }),function(err) {
-    //         console.log(err);
-    //     }
-    // }
-    //
-    // function updateUser(req, res) {
-    //     var userId = req.params['uid'];
-    //     var user = req.body;
-    //
-    //     userModel.updateUser(userId, user)
-    //         .then(function (user) {
-    //             res.sendStatus(200);
-    //         }, function (err) {
-    //             console.log(err);
-    //         })
-    // }
 
-    // function findUserByCredentials(req, res) {
-    //     var username = req.query.username;
-    //     var password = req.query.password;
-    //
-    //     userModel.findUserByCredentials(username, password)
-    //         .then(function (user) {
-    //             if (user) {
-    //                 res.send(user);
-    //             } else {
-    //                 res.sendStatus(404);
-    //             }
-    //         }, function (err) {
-    //             res.sendStatus(500);
-    //         })
-    // }
+    function deleteProduct(req, res) {
+        var pid = req.params['pid'];
 
-
-
-    // function deleteUser(req, res) {
-    //     var userId = req.params['uid'];
-    //
-    //     userModel.deleteUser(userId)
-    //         .then(function (user) {
-    //             res.send(200);
-    //         }), function (err) {
-    //         console.log(err);
-    //     }
-    // }
+        productModel.deleteProduct(pid)
+            .then(function (result) {
+                res.send(200);
+            }), function (err) {
+            console.log(err);
+        }
+    }
 };
 

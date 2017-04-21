@@ -6,30 +6,65 @@
     function UserService($http) {
 
         var api = {
-            "createUser": createUser,
+            "login": login,
+            "register": register,
             "findUserById": findUserById,
+            "loggedIn": loggedIn,
+            "logout": logout,
+            "findProductsByUser": findProductsByUser,
+            "removeFromCart": removeFromCart,
+            "isAdmin": isAdmin,
+            "findAllUsers": findAllUsers,
+            "deleteUser": deleteUser,
+
+
             // "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "findAllProducts": findAllProducts,
-            "findProductsByUser": findProductsByUser,
             "findProductById": findProductById
             // "deleteUser": deleteUser,
             // "findUser" : findUser
         };
         return api;
 
-        function createUser(user) {
-            return $http.post("/api/user", user);
-
+        function register(user) {
+            return $http.post("/api/register", user);
         }
+        function login(user) {
+            console.log(user);
+            return $http.post("/api/login", user);
+        }
+        function findUserById(userId) {
+            return $http.get("/api/user/find/" + userId);
+        }
+        function loggedIn() {
+            return $http.get("/api/loggedIn");
+        }
+        function logout() {
+            return $http.post("/api/logout");
+        }
+        function removeFromCart(uid, product) {
+            return $http.put("/api/user/remove/cart/" + uid, product);
+        }
+        function isAdmin() {
+            return $http.post("/api/isAdmin");
+        }
+        function findAllUsers() {
+            return $http.get("/api/admin/user");
+        }
+        function deleteUser(uid) {
+            return $http.delete("/api/user/admin/" + uid);
+        }
+
+
+
+
         function findUserByCredentials(email, password) {
             return $http.get("/api/user?email="+email+"&password="+password);
 
         }
-        function findUserById(userId) {
-            return $http.get("/api/user/"+userId);
-        }
+
         function updateUser(userId, user) {
             return $http.put("/api/user/"+userId, user);
         }

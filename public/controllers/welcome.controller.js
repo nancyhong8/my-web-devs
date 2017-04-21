@@ -8,16 +8,12 @@
         vm.login = login;
         vm.register = register;
 
-        function init() {
-
-        }
-        init();
-
         function login() {
             $location.url("/user/login");
         }
         function register() {
             $location.url("/user/register");
         }
+
     }
 })();

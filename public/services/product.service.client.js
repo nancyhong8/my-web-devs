@@ -7,7 +7,9 @@
 
         var api = {
             "createProduct": createProduct,
-            "findProductById": findProductById
+            "findProductById": findProductById,
+            "addToCart": addToCart,
+            "deleteProduct": deleteProduct
             // "findUserById": findUserById,
             // // "findUserByUsername": findUserByUsername,
             // "findUserByCredentials": findUserByCredentials,
@@ -26,6 +28,14 @@
         function findProductById(pid) {
             return $http.get("/api/product/view/" + pid);
         }
+
+        function addToCart(userId, product) {
+            return $http.put("/api/user/" + userId + "/add-product", product);
+        }
+        function deleteProduct(pid) {
+            return $http.delete("/api/product/delete/" + pid);
+        }
+
         // function findUserByCredentials(email, password) {
         //     return $http.get("/api/user?email="+email+"&password="+password);
         //

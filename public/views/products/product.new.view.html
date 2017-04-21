@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+
+<div class="container fluid">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a ng-click="model.home()" class="navbar-brand">Home</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a ng-click="model.profile()">Profile <span class="sr-only">(current)</span></a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="model.logout()">Logout</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Upload New Plant</h1>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Plant Name</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.product.name" type="text" class="form-control" id="inputFirstName" placeholder="Plant Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Plant Description</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.product.description" type="text" class="form-control" id="inputLastName" placeholder="Plant description">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Quantity</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.product.quantity" type="text" class="form-control" id="inputEmail" placeholder="5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPrice" class="col-lg-2 control-label">Price (USD)</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.product.price" type="text" class="form-control" id="inputPrice" placeholder="5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Picture</label>
+                <div class="col-lg-10">
+                    <!--<form action="/api/upload"  method="post" enctype="multipart/form-data">-->
+                        <!--<input  name="myFile"   type="file" class="form-control"/>-->
+                        <!--<input  name="seller" value="{{model.seller}}"   style="display: none"/>-->
+                        <!--<input  name="name" value="{{model.product.name}}"   style="display: none"/>-->
+                        <!--<input  name="description" value="{{model.product.description}}"   style="display: none"/>-->
+                        <!--<input  name="quantity" value="{{model.product.quantity}}"   style="display: none"/>-->
+                        <!--<input  name="id" value="{{model.product._id}}" style="display: none">-->
+
+                        <!--<button type="submit" class="btn btn-block btn-primary">Upload Image</button>-->
+                        <!---->
+                    <!--</form>-->
+
+                    <form action="/api/test"   method="post" enctype="multipart/form-data" style="display: none">
+                        <button type="submit" class="btn btn-block btn-primary" style="display: none">Upload Image</button>
+                    </form>
+                    <form action="/api/upload" method="post" enctype="multipart/form-data">
+                        <input  name="myFile" type="file" class="form-control"/>
+                        <input  name="name"     value="{{model.product.name}}" style="display: none"/>
+                        <input  name="quantity"    value="{{model.product.quantity}}"   style="display: none"/>
+                        <input  name="price" value="{{model.product.price}}"   style="display: none"/>
+                        <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
+                        <input  name="seller"  value="{{model.seller}}"   style="display: none"/>
+                        <button type="submit" class="btn btn-block btn-primary">Upload Product</button>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button ng-click="model.home()" type="reset" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

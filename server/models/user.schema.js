@@ -1,13 +1,17 @@
 module.exports = function() {
     var mongoose = require('mongoose');
     var userSchema = new mongoose.Schema(
-        {   'password': String,
+        {   'username': String,
+            'password': String,
             'firstName': String,
             'lastName': String,
             'email': String,
-            'seller': {type: String, enum: ['1', '0']},
-            'products': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
-            'dateCreated': {type: Date, default: Date.now()}
+            'roles': [{type: String, enum: ['ADMIN', 'SELLER']}],
+            'address': String,
+            'productSelling': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
+            'productBought': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
+            'productSold': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
+            'cart': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}]
         }, {collection: 'users'}
     );
     return userSchema;

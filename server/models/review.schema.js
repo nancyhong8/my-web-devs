@@ -1,11 +1,11 @@
 module.exports = function() {
     var mongoose = require('mongoose');
     var reviewSchema = new mongoose.Schema(
-        {   'rating': String,
-            'product': {type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'},
+        {   'product': {type: mongoose.Schema.Types.ObjectId, ref: 'shoppingProductModel'},
+            'rating': {type: String, enum: [1, 2, 3, 4, 5]},
+            'title': String,
             'reviewer': {type: mongoose.Schema.Types.ObjectId, ref:'shoppingUserModel'},
-            'dateCreated': {type: Date, default: Date.now()},
-            'seller': {type: String, enum: ['0', '1']}
+            'description': String
         }, {collection: 'reviews'}
     );
     return reviewSchema;

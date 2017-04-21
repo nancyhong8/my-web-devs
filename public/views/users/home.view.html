@@ -1,31 +1,15 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a ng-click="model.profile()" class="navbar-brand">Profile</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a ng-click="model.createProduct()">Sell A Plant <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="model.newest()">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+            <ul ng-show='model.user.roles.indexOf("ADMIN") > -1' class="nav navbar-nav">
+                <li><a ng-click="model.viewUsers()">Manage Users</a></li>
+            </ul>
+            <ul ng-show='model.user.roles.indexOf("SELLER") > -1' class="nav navbar-nav">
+                <li><a ng-click="model.createProduct()">Sell A Plant</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -33,8 +17,12 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-click="model.welcome()">Logout</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
             </ul>
         </div>
     </div>
@@ -43,21 +31,48 @@
 <div class="container-fluid">
 
     <div ng-repeat="product in model.products">
-        <table>
-            <tbody>
-            <tr>
-                <td>
-                    {{product.name}}
-                    <!--<a ng-click="model.widget(page._id)">{{page.name}}</a>-->
-                </td>
-                <td class="right-side-glyphicon">
-                    <!--<a ng-click="model.editPage(page._id)">-->
-                        <!--<span class="glyphicon glyphicon-cog"></span>-->
-                    <!--</a>-->
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                    <img ng-src="{{product.url}}">
+                <div class="caption">
+                    <h4 class="pull-right">${{product.price}}</h4>
+                    <h4><a ng-click="model.viewProduct(product._id)">{{product.name}} </a>
+                    </h4>
+                </div>
+                <div class="ratings">
+                    <p class="pull-right">{{product.reviews.length}} reviews</p>
+                    <p>
+                        {{model.rating(product.reviews)}}
+
+                        <img ng-src="{{model.stars}}" height="10px">
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!--<table>-->
+            <!--<tbody>-->
+            <!--<tr>-->
+                <!--<td ng-click="model.viewProduct(product._id)">-->
+                    <!--<h3>{{product.name}}</h3>-->
+                    <!--<p>-->
+                        <!--<img ng-src="{{product.url}}" width="20%" height="20%"/>-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--<img ng-src="{{model.stars}}" height="20" width="100">-->
+                    <!--</p>-->
+
+                    <!--&lt;!&ndash;<a ng-click="model.widget(page._id)">{{page.name}}</a>&ndash;&gt;-->
+                <!--</td>-->
+
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
     </div>
 
 </div>

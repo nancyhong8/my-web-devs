@@ -3,13 +3,19 @@
         .module("WebAppMaker")
         .controller("homeController", homeController);
 
-    function homeController($location, $routeParams, UserService) {
+    function homeController($sce, currentUser, $location, $routeParams, UserService) {
         var vm = this;
         var userId = $routeParams['uid'];
 
-        vm.home = home;
         vm.profile = profile;
         vm.createProduct = createProduct;
+        vm.logout = logout;
+        vm.viewProduct = viewProduct;
+        vm.cart = cart;
+        vm.user = currentUser;
+        vm.cartSize = vm.user.cart.length;
+        vm.rating = rating;
+        vm.viewUsers = viewUsers;
 
         function init() {
             var promise = UserService.findAllProducts();
@@ -19,46 +25,70 @@
                 }, function(err) {
                     console.log(err);
                 });
-            var promise2 = UserService.findUserById(userId);
-            promise2
-                .then(function(user) {
-                    vm.user = user.data;
-
-                }, function(err) {
-                    console.log(err);
-                })
-
         }
         init();
 
 
-        function home() {
-            $location.url("/home");
-        }
         function profile() {
-            // console.log("reached profile");
             $location.url("/user/" + userId);
-            // $location.url("/profile/" + userId);
         }
 
         function createProduct() {
-            $location.url("/product/new/" + userId);
+            $location.url("/user/" + userId + "/product");
         }
 
+        function logout() {
+            var promise = UserService.logout();
+            promise
+                .then(function(result) {
+                    $location.url("/welcome");
+                }, function(error) {
+                    console.log(error);
+                })
+        }
 
+        function viewProduct(pid) {
+            $location.url("/user/" + userId + "/product/" + pid);
+        }
 
-        // function register() {
-        //     console.log(vm.user);
-        //     if(vm.user.password == vm.user.verifyPassword) {
-        //         var promise = UserService.createUser(vm.user);
-        //         promise
-        //             .then(function(user) {
-        //                 $location.url("/main/" + user.data._id);
-        //             })
-        //     }
-        //     else {
-        //         vm.error = "Passwords do not match"
-        //     }
-        // }
+        function cart() {
+            $location.url("/user/" + userId + "/cart");
+        }
+
+        function rating(reviews) {
+            var rate = 0;
+            for(i = 0; i < reviews.length; i++) {
+                rate = rate + parseInt(reviews[i].rating);
+            }
+            rate = rate/reviews.length;
+            if (rate > 0) {
+                vm.rate = rate.toFixed(1) + " stars with " + reviews.length + " ratings";
+            }
+            if (rate.toFixed(0) == 1) {
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-1.jpg');
+            }
+            else if (rate.toFixed(0) == 2) {
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-2.jpg');
+
+            }
+            else if (rate.toFixed(0) == 3) {
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-3.jpg');
+            }
+            else if (rate.toFixed(0) == 4) {
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-4.jpg');
+            }
+            else if (rate.toFixed(0) == 5) {
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-5.jpg');
+            }
+            else {
+                vm.rate = "No reviews yet"
+                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-0.jpg');
+            }
+        }
+
+        function viewUsers() {
+            $location.url('/admin/all');
+        }
+
     }
 })();
