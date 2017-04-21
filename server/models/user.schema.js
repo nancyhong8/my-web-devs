@@ -11,7 +11,11 @@ module.exports = function() {
             'productSelling': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'productBought': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'productSold': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
-            'cart': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}]
+            'cart': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
+            'facebook': {
+                id: String,
+                token: String
+            }
         }, {collection: 'users'}
     );
     return userSchema;

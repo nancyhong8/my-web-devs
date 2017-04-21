@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("registerController", registerController);
 
-    function registerController($location, $routeParams, UserService) {
+    function registerController($location, $routeParams, UserService, $rootScope) {
         var vm = this;
         vm.welcome = welcome;
         vm.user = {roles: []};
@@ -23,8 +23,9 @@
                 var promise = UserService.register(vm.user);
                 promise
                     .then(function(user) {
-                        console.log('reach')
-                        $location.url("/user/" + user.data._id + "/home");
+                        var user = user.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id + "/home");
                     }, function(error) {
                         console.log(error);
                     })

@@ -7,7 +7,14 @@ module.exports = function(app) {
     var productModel = require('../models/product.model.js');
     var bcrypt = require("bcrypt-nodejs");
     var LocalStrategy = require('passport-local').Strategy;
-
+    // var FacebookStrategy = require('passport-facebook').Strategy;
+    //
+    // app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    // app.get('/auth/facebook/callback',
+    //     passport.authenticate('facebook', {
+    //         successRedirect: '/#/user',
+    //         failureRedirect: '/#/user/login'
+    //     }));
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get   ('/api/loggedIn', loggedin);

@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/shopping');
-mongoose.connect('mongodb://nancyh:Rewolf123@ds117899.mlab.com:17899/heroku_xn9ljwr0');
+mongoose.connect('mongodb://localhost/shopping');
+//mongoose.connect('mongodb://nancyh:Rewolf123@ds117899.mlab.com:17899/heroku_xn9ljwr0');
 
 
 // configure a public directory to host static content

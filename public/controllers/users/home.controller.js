@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("homeController", homeController);
 
-    function homeController($sce, currentUser, $location, $routeParams, UserService) {
+    function homeController($sce, currentUser, $location, $routeParams, UserService, $rootScope) {
         var vm = this;
         var userId = $routeParams['uid'];
 
@@ -41,6 +41,7 @@
             var promise = UserService.logout();
             promise
                 .then(function(result) {
+                    $rootScope.currentUser = null;
                     $location.url("/welcome");
                 }, function(error) {
                     console.log(error);

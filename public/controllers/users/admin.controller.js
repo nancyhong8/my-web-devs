@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("adminController", adminController);
 
-    function adminController(adminUser, $location, $routeParams, UserService) {
+    function adminController(adminUser, $location, $routeParams, UserService, $rootScope) {
 
         var vm = this;
 
@@ -33,6 +33,7 @@
             var promise = UserService.logout();
             promise
                 .then(function(result) {
+                    $rootScope.adminUser = null;
                     $location.url("/welcome");
                 }, function(error) {
                     console.log(error);

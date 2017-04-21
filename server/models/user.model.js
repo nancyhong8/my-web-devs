@@ -125,6 +125,9 @@ function deleteUser(uid) {
     return deferred.promise;
 }
 
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
 
 userModel.createUser = createUser;
 userModel.findUserByCredentials = findUserByCredentials;
@@ -135,6 +138,7 @@ userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.removeFromCart = removeFromCart;
 userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
+userModel.findUserByFacebookId = findUserByFacebookId;
 // userModel.findUserByUsername = findUserByUsername;
 // userModel.deleteUser = deleteUser;
 
