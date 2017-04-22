@@ -3,18 +3,20 @@
         .module("WebAppMaker")
         .controller("historyController", historyController);
 
-    function historyController($location, $routeParams, UserService) {
+    function historyController($location, $routeParams, UserService, $rootScope) {
         var vm = this;
         var userId = $routeParams["uid"];
 
         vm.home = home;
         vm.logout = logout;
         vm.profile = profile;
-        vm.history = history;
         vm.viewProduct = viewProduct;
         vm.review = review;
         vm.remove = remove;
-        var products;
+        vm.cart = cart;
+        vm.contactSeller = contactSeller;
+        var productsBought;
+        var productSelling
 
 
         function init() {
@@ -23,12 +25,17 @@
             var promise = UserService.findUserById(userId)
                 .then(function(user) {
                     vm.user = user.data;
+                    vm.cartSize = vm.user.cart.length;
                     if(vm.user.productBought.length < 1) {
-                        vm.noProducts = "There are no products in your cart";
+                        vm.noProductsBought = "You have not bought any products";
                     }
-                    products = vm.user.productBought;
-                    console.log(products);
-                    createProductMap(products);
+                    if(vm.user.productSelling.length < 1) {
+                        vm.noProductSelling = "You are currently not selling any products.";
+                    }
+                    productsSelling = vm.user.productSelling;
+                    productsBought = vm.user.productBought;
+                    vm.productsBought = createProductMap(productsBought);
+                    vm.productsSelling = createProductMap(productsSelling);
 
                 }, function(err) {
                     console.log(err)
@@ -38,6 +45,7 @@
 
         // Maps the product to the amount selected
         function createProductMap(products) {
+            var productArr = [];
             var  productMap = {};
             vm.products = [];
             for(i = 0; i < products.length; i++) {
@@ -52,11 +60,12 @@
                 for(i = 0; i < products.length; i++) {
                     if(products[i].name == key) {
                         products[i].quantity = productMap[key];
-                        vm.products.push(products[i]);
+                        productArr.push(products[i]);
                         break;
                     }
                 }
             }
+            return productArr;
         }
 
 
@@ -93,6 +102,12 @@
                 }, function(error) {
                     console.log(error);
                 })
+        }
+        function cart() {
+            $location.url("/user/" + userId + "/cart");
+        }
+        function contactSeller(product) {
+            $location.url("/user/" + userId + "/message/" + product.seller);
         }
 
     }

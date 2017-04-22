@@ -17,8 +17,10 @@
         vm.cart = cart;
         vm.editProduct = editProduct;
         vm.viewUser = viewUser;
+        vm.contact = contact;
 
         function init() {
+            console.log(pid);
             var promise = ProductService.findProductById(pid);
             promise
                 .then(function(product) {
@@ -122,6 +124,9 @@
         }
         function viewUser(uid) {
             $location.url("/user/" + uid + "/view");
+        }
+        function contact() {
+            $location.url("/user/" + uid + "/message/" + vm.product.seller._id);
         }
 
     }

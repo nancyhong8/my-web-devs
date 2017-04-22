@@ -15,6 +15,7 @@
         vm.cart = cart;
         vm.deleteUser = deleteUser;
         vm.inbox = inbox;
+        vm.viewProfile = viewProfile;
 
         // updates user
         function update() {
@@ -67,6 +68,9 @@
         }
         function inbox() {
             $location.url("/user/" + userId + "/inbox");
+        }
+        function viewProfile() {
+            $location.url("/user/" + userId + "/view");
         }
     }
 })();

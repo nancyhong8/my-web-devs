@@ -51,7 +51,7 @@
                 <h5>{{review.description}}</h5>
                 <p> - {{review.reviewer.firstName}} {{review.reviewer.lastName}}
                     <a ng-show="model.userId == review.reviewer._id || model.user.roles.includes('ADMIN')" ng-click="model.editReview(review)" class="pull-right">
-                        <span class="black">Edit</span>
+                        <span class="glyphicon glyphicon-cog"></span>
                     </a>
                 </p>
             </li>

@@ -12,7 +12,7 @@ module.exports = function(app) {
     //
 
     var productModel = require('../models/product.model.js');
-
+    var userModel = require('../models/user.model.js');
 
 
     var multer = require('multer'); // npm install multer --save
@@ -65,6 +65,11 @@ module.exports = function(app) {
 
         productModel.createProduct(product)
             .then(function(product) {
+                userModel.addToProductSelling(seller, product)
+                    .then(function(seller) {
+                    }, function(err) {
+                        console.log(err);
+                    })
                 res.redirect("/#!\/user\/" + seller + "\/home");
             }),function(err) {
             console.log(err);

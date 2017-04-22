@@ -11,7 +11,11 @@ module.exports = function() {
             'productSelling': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'productBought': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'cart': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
-            'inbox': [{type: Object}],
+            'inbox': [ {
+                message: String,
+                from: {type: mongoose.Schema.Types.ObjectId, ref:'shoppingUserModel'}
+            }],
+            'description': String,
             'facebook': {
                 id: String,
                 token: String

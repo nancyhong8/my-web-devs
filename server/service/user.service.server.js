@@ -30,6 +30,7 @@ module.exports = function(app) {
     app.get("/api/products/:uid", checkSameUser, findProductsByUser);
     app.put("/api/user/:uid/add-product", checkSameUser, addToCart);
     app.get("/api/user/find/:uid", findUserById);
+    app.put("/api/user/message/:uid", sendMessage);
     // app.put("/api/user/remove/cart/:uid", removeFromCart);
 
     // app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
@@ -198,7 +199,6 @@ module.exports = function(app) {
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
 
-        // user.password = bcrypt.hashSync(user.password);
         userModel.createUser(user)
             .then(function(user) {
                 req.login(user, function(error) {
@@ -272,6 +272,18 @@ module.exports = function(app) {
                 console.log(err);
             })
     }
+    function sendMessage(req, res) {
+        var userId = req.params['uid'];
+        var message = req.body;
+        userModel.sendMessage(userId, message)
+            .then(function(user) {
+                res.sendStatus(200);
+            }, function(err) {
+                res.sendStatus(404);
+                console.log(err);
+            })
+    }
+
     //
     // function removeFromCart(req, res) {
     //     var uid = req.params['uid'];

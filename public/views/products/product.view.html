@@ -59,6 +59,7 @@
             {{model.product.description}}
         </div>
         <div>
+            </br>
             Seller:
             <a ng-click="model.viewUser(model.product.seller._id)">
                  {{model.product.seller.firstName}} {{model.product.seller.lastName}}
@@ -66,7 +67,8 @@
         </div>
         <div>
             </br>
-            <a ng-show="model.user._id == model.product.seller || model.user.roles.includes('ADMIN')" ng-click="model.editProduct()"
+            <a ng-click="model.contact()" class="btn btn-info btn-block">Contact Seller</a>
+            <a ng-show="model.user._id == model.product.seller._id || model.user.roles.includes('ADMIN')" ng-click="model.editProduct()"
                class="btn btn-default btn-block">Edit Product</a>
         </div>
 

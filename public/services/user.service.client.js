@@ -18,6 +18,7 @@
             "deleteUser": deleteUser,
             "updateMe": updateMe,
             "deleteMe": deleteMe,
+            "sendMessage": sendMessage,
 
 
             // "findUserByUsername": findUserByUsername,
@@ -34,7 +35,6 @@
             return $http.post("/api/register", user);
         }
         function login(user) {
-            console.log(user);
             return $http.post("/api/login", user);
         }
         function findUserById(userId) {
@@ -85,6 +85,10 @@
 
         function updateMe(uid, user) {
             return $http.put("/api/user/" + uid, user);
+        }
+
+        function sendMessage(uid, message) {
+            return $http.put("/api/user/message/" + uid, message);
         }
         // function findUserByUsername(username) {
         //     return $http.get("/api/user?username="+username);

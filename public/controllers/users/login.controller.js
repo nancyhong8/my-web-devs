@@ -11,7 +11,6 @@
 
 
         function login() {
-            console.log(vm.user);
             var promise = UserService.login(vm.user);
             promise
                 .then(function(user) {

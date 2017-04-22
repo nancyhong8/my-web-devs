@@ -28,6 +28,14 @@
                     currentUser: checkLogin
                 }
             })
+            .when("/user/:uid/message/:to", {
+                templateUrl: "views/users/message.view.html",
+                controller: "messageController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkLogin
+                }
+            })
             .when("/user/:uid/inbox", {
                 templateUrl: "views/users/inbox.view.html",
                 controller: "inboxController",
@@ -39,14 +47,18 @@
             .when("/user/:uid/view", {
                 templateUrl: "views/users/user.view.html",
                 controller: "userViewController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkLogin
+                }
             })
             .when("/admin/all", {
                 templateUrl: "views/users/admin.view.html",
                 controller: "adminController",
                 controllerAs: "model",
                 resolve: {
-                    adminUser: checkAdmin
+                    adminUser: checkAdmin,
+                    currentUser: checkLogin
                 }
             })
             .when("/user/:uid/home", {

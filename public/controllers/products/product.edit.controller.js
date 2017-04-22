@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("editProductController", editProductController);
 
-    function editProductController($location, $routeParams, ProductService, UserService) {
+    function editProductController($sce, $location, $routeParams, ProductService, UserService) {
         var vm = this;
         var uid = $routeParams['uid'];
         var pid = $routeParams['pid'];
@@ -14,7 +14,6 @@
         vm.logout = logout;
         vm.profile = profile;
         vm.cart = cart;
-        var user;
 
         function init() {
             var promise = ProductService.findProductById(pid);
@@ -27,9 +26,11 @@
             var promise1 = UserService.findUserById(uid);
             promise1
                 .then(function(user) {
-                    user = user;
-                    vm.cartSize = user.data.cart.length;
+                    vm.user = user.data;
+                    vm.cartSize = vm.user.cart.length;
                 })
+
+            vm.product.url = $sce.trustAsResourceUrl(vm.product.url);
         }
         init();
 
@@ -60,7 +61,8 @@
         }
 
         function deleteProduct() {
-            if(user.roles.includes('ADMIN') || user._id == vm.seller) {
+            console.log(vm.user);
+            if(vm.user.roles.includes('ADMIN') || vm.user._id == vm.seller) {
                 var promise = ProductService.deleteProduct(pid);
                 promise
                     .then(function(product) {
