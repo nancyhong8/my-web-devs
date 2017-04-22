@@ -20,6 +20,7 @@
             promise
                 .then(function(product) {
                     vm.product = product.data;
+                    vm.product.url = $sce.trustAsResourceUrl(vm.product.url);
                 }, function(error) {
                     console.log(error);
                 })
@@ -30,7 +31,6 @@
                     vm.cartSize = vm.user.cart.length;
                 })
 
-            vm.product.url = $sce.trustAsResourceUrl(vm.product.url);
         }
         init();
 
