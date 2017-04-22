@@ -25,6 +25,8 @@
             promise
                 .then(function(product) {
                     vm.product = product.data;
+                    vm.productImg = $sce.trustAsResourceUrl(vm.product.url);
+                    console.log(vm.product.url)
                     calcReviews(vm.product.reviews);
                 }, function(err) {
                     console.log(err);
