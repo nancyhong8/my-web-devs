@@ -47,8 +47,10 @@ module.exports = function(app) {
     passport.deserializeUser(deserializeUser);
 
     var facebookConfig = {
-        clientID     : "283364938783133",
-        clientSecret : "67049bb851f6a98b5da5385313932b24",
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        //|| "283364938783133",
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        //|| "67049bb851f6a98b5da5385313932b24",
         callbackURL  : "http://localhost:3500/auth/facebook/callback"
     };
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
