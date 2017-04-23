@@ -25,7 +25,7 @@ mongoose.connect('mongodb://nancyh:Rewolf123@ds117899.mlab.com:17899/heroku_xn9l
 
 
 // configure a public directory to host static content
-app.use(express.static(__dirname + '/public/project'));
+app.use(express.static(__dirname + '/public'));
 
 
 require("./project/server/app.server.js")(app);
