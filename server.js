@@ -28,7 +28,7 @@ mongoose.connect('mongodb://nancyh:Rewolf123@ds117899.mlab.com:17899/heroku_xn9l
 app.use(express.static(__dirname + '/public'));
 
 
-require("./server/app.server.js")(app);
+require("./project/server/app.server.js")(app);
 
 
 var port = process.env.PORT || 3500;

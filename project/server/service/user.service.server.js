@@ -84,15 +84,6 @@ module.exports = function(app) {
     }
 
 
-    // var googleConfig = {
-    //     clientID     : process.env.GOOGLE_CLIENT_ID_SPRING_2017,
-    //     clientSecret : process.env.GOOGLE_CLIENT_SECRET_SPRING_2017,
-    //     callbackURL  : process.env.GOOGLE_CALLBACK_URL_SPRING_2017
-    // };
-
-    // passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-
-
     function localStrategy(username, password, done) {
 
         userModel.findUserByUsername(username)
@@ -105,43 +96,6 @@ module.exports = function(app) {
                 }
             })
     }
-    // function googleStrategy(token, refreshToken, profile, done) {
-    //     userModel
-    //         .findUserByGoogleId(profile.id)
-    //         .then(
-    //             function(user) {
-    //                 if(user) {
-    //                     return done(null, user);
-    //                 } else {
-    //                     var email = profile.emails[0].value;
-    //                     var emailParts = email.split("@");
-    //                     var newGoogleUser = {
-    //                         username:  emailParts[0],
-    //                         firstName: profile.name.givenName,
-    //                         lastName:  profile.name.familyName,
-    //                         email:     email,
-    //                         google: {
-    //                             id:    profile.id,
-    //                             token: token
-    //                         }
-    //                     };
-    //                     return userModel.createUser(newGoogleUser);
-    //                 }
-    //             },
-    //             function(err) {
-    //                 if (err) { return done(err); }
-    //             }
-    //         )
-    //         .then(
-    //             function(user){
-    //                 return done(null, user);
-    //             },
-    //             function(err){
-    //                 if (err) { return done(err); }
-    //             }
-    //         );
-    // }
-
 
     function checkSameUser(req, res, next) {
         if(req.user && req.user._id == req.params['uid']) {
@@ -199,19 +153,30 @@ module.exports = function(app) {
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
 
-        userModel.createUser(user)
-            .then(function(user) {
-                req.login(user, function(error) {
-                    if(error) {
-                        res.send(400);
-                    }
-                    else {
-                        res.send(user);
-                    }
-                })
-            }, function (error) {
+        userModel.findUserByUsername(user.username)
+            .then(function(response) {
+                if(response) {
+                    res.sendStatus(400)
+                }
+                else {
+                    userModel.createUser(user)
+                        .then(function(user) {
+                            req.login(user, function(error) {
+                                if(error) {
+                                    res.send(400);
+                                }
+                                else {
+                                    res.send(user);
+                                }
+                            })
+                        }, function (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        })
+                }
+
+            }, function(error) {
                 console.log(error);
-                res.sendStatus(400);
             })
     }
 

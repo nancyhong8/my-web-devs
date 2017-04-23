@@ -16,7 +16,7 @@ module.exports = function(app) {
 
 
     var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: __dirname+'/../../public/resources/uploads' });
+    var upload = multer({ dest: __dirname+'/../../../public/project/resources/uploads' });
    // app.post("/api/upload",  uploadImage);
     app.post("/api/upload", upload.single("myFile"), uploadImage)
     app.post("/api/upload/edit", upload.single("myFile"), changeImage);
@@ -36,12 +36,14 @@ module.exports = function(app) {
             'seller': seller,
             'description': description,
             'price': price,
-            'url' : '/resources/uploads/' + filename
+            'url' : '/project/resources/uploads/' + filename
         }
 
         productModel.editProduct(product)
             .then(function(product) {
-                res.redirect("/#!\/user\/" + seller + "\/home");
+              //  res.redirect("/#!\/user\/" + seller + "\/home");
+                res.redirect("/project\/index.html#!\/user\/" + seller + "\/home");
+
             }, function(error) {
                 console.log(error);
             })
@@ -60,7 +62,7 @@ module.exports = function(app) {
             'seller': seller,
             'description': description,
             'price': price,
-            'url' : '/resources/uploads/' + filename
+            'url' : '/project/resources/uploads/' + filename
         }
 
         productModel.createProduct(product)
@@ -70,7 +72,7 @@ module.exports = function(app) {
                     }, function(err) {
                         console.log(err);
                     })
-                res.redirect("/#!\/user\/" + seller + "\/home");
+                res.redirect("/project\/index.html#!\/user\/" + seller + "\/home");
             }),function(err) {
             console.log(err);
         }
