@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ng-click="model.home()" class="navbar-brand">Home</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a ng-click="model.profile()">Profile <span class="sr-only">(current)</span></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<h1>Write A Message!</h1>
+
+<div ng-show="model.alert" class="alert alert-success" role="alert">
+    {{model.alert}}
+</div>
+
+
+<form class="form-horizontal">
+    <fieldset>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Message</label>
+            <div class="col-lg-10">
+                <textarea rows="5" ng-model="model.message" class="form-control" placeholder="Message to Seller">
+                    Hi!slkjlskjdf
+                </textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button ng-click="model.send()" type="submit" class="btn btn-success">Send</button>
+                <button ng-click="model.home()" type="reset" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</div>

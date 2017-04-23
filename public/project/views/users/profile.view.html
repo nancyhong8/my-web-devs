@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<div class="container fluid">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a ng-click="model.home()" class="navbar-brand">Home</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul ng-show='model.user.roles.indexOf("SELLER") > -1' class="nav navbar-nav">
+                    <li><a ng-click="model.createProduct()">Sell A Plant</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a ng-click="model.history()" >History<span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a ng-click="model.inbox()" >Inbox<span class="sr-only">(current)</span></a></li>
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+                    <li><a ng-click="model.logout()">Logout</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <h1>Profile</h1>
+
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <label for="username" class="col-lg-2 control-label">Username</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.firstName" type="text" class="form-control" id="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.firstName" type="text" class="form-control" id="firstName" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.lastName" type="text" class="form-control" id="lastName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea  rows="4" ng-model="model.user.description" type="text"  class="form-control" id="description" placeholder="Description">
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class="col-lg-10"  ng-hide='model.user.roles.indexOf("SELLER") > -1'>
+                    <div class="radio">
+                        <label>
+                            <input  ng-model="model.role" type="checkbox" ng-true-value="'SELLER'">
+                            I wish to also sell
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10"  ng-show='model.user.roles.indexOf("SELLER") > -1'>
+                    <div class="radio">
+                        <label>
+                            <input  ng-model="model.role" type="checkbox" ng-true-value="'REMOVE'">
+                            I wish to no longer sell
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button ng-click="model.viewProfile()" class="btn btn-info">View Profile</button>
+                    <button ng-click="model.update()" type="submit" class="btn btn-success">Update Profile</button>
+                    <button ng-click="model.deleteUser()" type="submit" class="btn btn-danger">Delete Account</button>
+                    <button ng-click="model.home()" type="reset" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

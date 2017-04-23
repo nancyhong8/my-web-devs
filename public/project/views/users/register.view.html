@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+
+<div class="container fluid">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a ng-click="model.home()" class="navbar-brand">Back</a>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <h1>Register</h1>
+
+
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <label for="username" class="col-lg-2 control-label">Username</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.firstName" type="text" class="form-control" id="firstName" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.lastName" type="text" class="form-control" id="lastName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea  rows="4" ng-model="model.user.description" type="text"  class="form-control" id="description" placeholder="Description">
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="verifyPassword" class="col-lg-2 control-label">Verify Password</label>
+                <div class="col-lg-10">
+                    <input ng-model="model.user.verifyPassword" type="password" class="form-control" id="verifyPassword" placeholder="Verify Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label>
+                            <input ng-model="model.seller" type="checkbox" ng-true-value="'1'">
+                            I wish to also sell
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label>
+                            <input ng-model="model.admin" type="checkbox" ng-true-value="'1'">
+                            Make me admin
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button ng-click="model.register()" type="submit" class="btn btn-success">Register</button>
+                    <button ng-click="model.welcome()" type="reset" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

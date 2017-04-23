@@ -1,0 +1,91 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ng-click="model.home()" class="navbar-brand">Home</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a ng-click="model.profile()">Profile <span class="sr-only">(current)</span></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="col-xs-12 col-sm-8">
+    <div class="container-fluid">
+        <img ng-src="{{model.productImg}}" height="500px" width="100%">
+    </div>
+</div>
+
+
+
+<div class="col-xs-4 hidden-xs">
+    <div class="container-fluid">
+        <h1>{{model.product.name}}</h1>
+        <h3> ${{model.product.price}}</h3>
+        <div>
+            <img ng-src="{{model.stars}}" height="40" width="180">
+            <a ng-click="model.reviews()">{{model.rate}}</a>
+        </div>
+        </br>
+        <div ng-show="model.message" class="alert alert-success" role="alert">
+            {{model.message}}
+        </div>
+
+        <div>
+            <a ng-click="model.addToCart()"
+               class="btn btn-success btn-block">Add to cart</a>
+            </br>
+            <a ng-click="model.writeReview()"
+               class="btn btn-primary btn-block">Review Product</a>
+        </div>
+
+        <div>
+            <h3>Product Description</h3>
+            {{model.product.description}}
+        </div>
+        <div>
+            </br>
+            Seller:
+            <a ng-click="model.viewUser(model.product.seller._id)">
+                 {{model.product.seller.firstName}} {{model.product.seller.lastName}}
+            </a>
+        </div>
+        <div>
+            </br>
+            <a ng-click="model.contact()" class="btn btn-info btn-block">Contact Seller</a>
+            <a ng-show="model.user._id == model.product.seller._id || model.user.roles.includes('ADMIN')" ng-click="model.editProduct()"
+               class="btn btn-default btn-block">Edit Product</a>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid">
+
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+

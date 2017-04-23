@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a ng-click="model.profile()" class="navbar-brand">Profile</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul ng-show='model.user.roles.indexOf("ADMIN") > -1' class="nav navbar-nav">
+                <li><a ng-click="model.viewUsers()">Manage Users</a></li>
+            </ul>
+            <ul ng-show='model.user.roles.indexOf("SELLER") > -1' class="nav navbar-nav">
+                <li><a ng-click="model.createProduct()">Sell A Plant</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input ng-model="model.searchKey" type="text" class="form-control" placeholder="Search using keyword">
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div ng-repeat="product in model.products | filter: model.searchKey">
+
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                    <img ng-src="{{product.url}}">
+                <div class="caption">
+                    <h4 class="pull-right">${{product.price}}</h4>
+                    <h4><a ng-click="model.viewProduct(product._id)">{{product.name}} </a>
+                    </h4>
+                </div>
+                <div class="ratings">
+                    <p class="pull-right">{{product.reviews.length}} reviews</p>
+                    <p>
+                        {{model.rating(product.reviews)}}
+
+                        <img ng-src="{{model.stars}}" height="10px">
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+

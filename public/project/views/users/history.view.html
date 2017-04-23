@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a ng-click="model.home()" class="navbar-brand">Home</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a ng-click="model.profile()">Profile <span class="sr-only">(current)</span></a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h3>Hi {{model.user.firstName}}, below is your history with us!</h3>
+
+<div class="container-fluid">
+
+    <h4>Products Bought</h4>
+
+    <div ng-show="model.noProductsBought">
+        {{model.noProductsBought}}
+    </div>
+
+    <div ng-repeat="product in model.productsBought">
+        <table>
+            <tr>
+
+
+                <td>
+                    <img ng-src="{{product.url}}" width="80%" height="130px"/>
+                </td>
+                <td>
+                    <a ng-click="model.viewProduct(product._id)">{{product.name}} </a>
+
+                </td>
+                <td>
+                    Price: ${{product.price}}
+                </td>
+                <td>
+                    Quantity: {{product.quantity}}
+                </td>
+
+                <td>
+                    <button ng-click="model.review(product)" type="reset" class="btn btn-primary btn-block">Review</button>
+                    <button ng-click="model.contactSeller(product)" class="btn btn-default btn-block">Contact Seller</button>
+                    <button ng-click="model.remove(product)" ng-show="model.user.roles.includes('ADMIN')" class="btn btn-danger btn-block">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h4>Products Selling</h4>
+    <div ng-show="model.noProductsSelling">
+        {{model.noProductsSelling}}
+    </div>
+    <div ng-repeat="product in model.productsSelling">
+        <table>
+            <tr>
+
+
+                <td>
+                    <img ng-src="{{product.url}}" width="80%" height="130px"/>
+                </td>
+                <td>
+                    <a ng-click="model.viewProduct(product._id)">{{product.name}} </a>
+
+                </td>
+                <td>
+                    Price: ${{product.price}}
+                </td>
+                <td>
+                    Quantity: {{product.quantity}}
+                </td>
+
+                <td>
+                    <button ng-click="model.remove(product)" class="btn btn-danger btn-block">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- FOOTER -->
+

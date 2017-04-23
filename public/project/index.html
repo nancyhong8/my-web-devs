@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WebAppMaker">
+
+
+<head>
+
+    <link href="resources/stylesheets/bootswatch/bootstrap.css" rel="stylesheet"/>
+    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
+    <!--<link href="resources/stylesheets/bootswatch/_bootswatch.scss" rel="stylesheet"/>-->
+    <link href="resources/stylesheets/style.css" rel="stylesheet"/>
+    <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/flatly/bootstrap.min.css" rel="stylesheet">-->
+
+    <script src="resources/javascripts/jquery.min.js"></script>
+    <script src="resources/javascripts/jquery-ui.js"></script>
+    <script src="resources/javascripts/angular.min.js"></script>
+    <script src="resources/javascripts/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+
+    <!-- controllers -->
+    <script src="controllers/welcome.controller.js"></script>
+    <script src="controllers/users/login.controller.js"></script>
+    <script src="controllers/users/register.controller.js"></script>
+    <script src="controllers/users/profile.controller.js"></script>
+    <script src="controllers/users/home.controller.js"></script>
+    <script src="controllers/users/history.controller.js"></script>
+    <script src="controllers/users/cart.controller.js"></script>
+    <script src="controllers/users/admin.controller.js"></script>
+    <script src="controllers/users/inbox.controller.js"></script>
+    <script src="controllers/users/user.view.controller.js"></script>
+    <script src="controllers/users/message.controller.js"></script>
+
+    <script src="controllers/products/product.new.controller.js"></script>
+    <script src="controllers/products/product.view.controller.js"></script>
+    <script src="controllers/products/product.edit.controller.js"></script>
+
+    <script src="controllers/reviews/review.new.controller.js"></script>
+    <script src="controllers/reviews/review.list.controller.js"></script>
+    <script src="controllers/reviews/review.edit.controller.js"></script>
+
+
+    <!-- services -->
+    <script src="services/user.service.client.js"></script>
+    <script src="services/product.service.client.js"></script>
+    <script src="services/review.service.client.js"></script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <title>Web Dev Course Home Page</title>
+
+</head>
+<body>
+
+
+<div ng-view></div>
+
+</body>
+
+</html>

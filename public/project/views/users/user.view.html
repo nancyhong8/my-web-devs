@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<div class="container fluid">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a ng-click="model.home()" class="navbar-brand">Home</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a ng-click="model.viewProfile()" >Profile</a></li>
+                </ul>
+                <ul ng-show='model.user.roles.indexOf("SELLER") > -1' class="nav navbar-nav">
+                    <li><a ng-click="model.createProduct()">Sell A Plant</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="model.cart()">My cart({{model.cartSize}})</a></li>
+                    <li><a ng-click="model.logout()">Logout</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <h1>{{model.profile.firstName}}'s Profile</h1>
+
+
+
+
+    <div class="container-fluid">
+
+        <div class="col-xs-3 hidden-xs">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>{{model.profile.firstName}} {{model.profile.lastName}}</h4>
+                    <p>{{model.profile.description}}</p>
+                    <p>{{model.profile.email}}</p>
+                    <button ng-click="model.contact()" class="btn btn-primary btn-block">Contact</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-13 col-sm-8">
+
+            <h4>Products {{model.profile.firstName}} is selling</h4>
+
+            <div ng-show="model.noProducts">
+                {{model.noProducts}}
+            </div>
+
+            <div ng-repeat="product in model.products">
+                <table>
+                    <tr>
+                        <td>
+                            <img ng-src="{{product.url}}" width="80%" height="130px"/>
+                        </td>
+                        <td>
+                            <a ng-click="model.viewProduct(product._id)">
+                                {{product.name}}
+                            </a>
+                        </td>
+                        <td>
+                            Price: ${{product.price}}
+                        </td>
+
+                        <td>
+                            <button ng-show="model.user.roles.includes('ADMIN') || model.user._id == model.profileId" ng-click="model.remove(product)" type="reset" class="btn btn-default">Remove</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
