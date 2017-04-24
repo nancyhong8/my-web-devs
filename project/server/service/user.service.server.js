@@ -33,32 +33,21 @@ module.exports = function(app) {
     app.put("/api/user/message/:uid", sendMessage);
     // app.put("/api/user/remove/cart/:uid", removeFromCart);
 
-    // app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    //
-    // app.get('/auth/google/callback',
-    //     passport.authenticate('google', {
-    //         successRedirect: '/#/user/profile',
-    //         failureRedirect: '/#/user/login'
-    //     }));
-
-
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        //|| "283364938783133",
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        //|| "67049bb851f6a98b5da5385313932b24",
+        clientID     : process.env.FACEBOOK_CLIENT_ID || "283364938783133",
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET || "a915e8a6f8fabec439666a09af4db491",
         //callbackURL  : "http://localhost:3500/auth/facebook/callback"
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:3500/auth/facebook/callback"
     };
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        developerModel
+        userModel
             .findUserByFacebookId(profile.id)
             .then(function(user) {
                 if(user) {

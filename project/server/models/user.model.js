@@ -64,7 +64,8 @@ function updateUser(userId, user) {
         'lastName': user.lastName,
         'roles': user.roles,
         'description': user.description,
-        'inbox': user.inbox
+        'inbox': user.inbox,
+        'facebook': user.facebook
     }}, function(err, user) {
         deferred.resolve(user);
     });
