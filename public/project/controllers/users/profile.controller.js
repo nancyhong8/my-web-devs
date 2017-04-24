@@ -5,7 +5,7 @@
 
     function profileController(currentUser, $location, $routeParams, UserService, $rootScope) {
         var vm = this;
-        var userId = $routeParams["uid"];
+    //    var userId = $routeParams["uid"];
         vm.home = home;
         vm.update = update;
         vm.logout = logout;
@@ -17,6 +17,7 @@
         vm.inbox = inbox;
         vm.viewProfile = viewProfile;
         vm.createProduct = createProduct;
+        var userId = vm.user._id;
 
         // updates user
         function update() {

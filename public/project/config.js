@@ -20,7 +20,7 @@
                 controller: "registerController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/user/profile", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "profileController",
                 controllerAs: "model",
