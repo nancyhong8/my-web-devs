@@ -11,10 +11,13 @@ module.exports = function(app) {
 
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: 'project/index.html#!/user/profile',
-            failureRedirect: 'project/index.html#!/user/login'
-        }));
+        function() {
+        console.log('reached auth');
+        }
+        // passport.authenticate('facebook', {
+        //     successRedirect: 'project/index.html#!/user/profile',
+        //     failureRedirect: 'project/index.html#!/user/login'
+        // }));
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get   ('/api/loggedIn', loggedin);
@@ -240,21 +243,6 @@ module.exports = function(app) {
                 console.log(err);
             })
     }
-
-    //
-    // function removeFromCart(req, res) {
-    //     var uid = req.params['uid'];
-    //     var product = req.body;
-    //     userModel.removeFromCart(uid, product)
-    //         .then(function(result) {
-    //             res.sendStatus(200);
-    //         }, function(error) {
-    //             res.sendStatus(404);
-    //         })
-    // }
-
-
-
 
     function serializeUser(user, done) {
         done(null, user);
