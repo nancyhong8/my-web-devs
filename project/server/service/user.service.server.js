@@ -11,14 +11,10 @@ module.exports = function(app) {
 
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
-        function() {
-        console.log('reached auth');
-        }
-        // passport.authenticate('facebook', {
-        //     successRedirect: 'project/index.html#!/user/profile',
-        //     failureRedirect: 'project/index.html#!/user/login'
-        // }));
-    );
+        passport.authenticate('facebook', {
+            successRedirect: '/project/index.html#!/user/profile',
+            failureRedirect: '/project/index.html#!/user/login'
+        }));
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get   ('/api/loggedIn', loggedin);
