@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input ng-model="model.widget.name"
+                   class="form-control" type="text" id="name" placeholder="Name"></input>
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea ng-model="model.widget.text"
+                      class="form-control" rows="1" id="text" placeholder="Text"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="size">Size</label>
+            <input ng-model="model.widget.size"
+                   class="form-control" type="number" id="size" placeholder="Size"></input>
+        </div>
+
+    </form>
+
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWidget()">Delete</a>
+
+</div>
+
+
+
+<!--&lt;!&ndash; BOTTOM &ndash;&gt;-->
+
+<!--<div class="sticky-footer">-->
+    <!--<div class="container-fluid">-->
+        <!--<h2><div class="right-side-glyphicon">-->
+            <!--<a ng-click="model.profile()">-->
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+            <!--</a>-->
+        <!--</div></h2>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; BOTTOM END &ndash;&gt;-->
+

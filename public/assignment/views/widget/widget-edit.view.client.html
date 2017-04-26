@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- HEADING -->
+
+<div class="sticky-header">
+    <div class="container-fluid">
+        <h2 class="white-color">
+            <div class="right-side-glyphicon">
+                <a ng-click="model.updateWidget()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="left-side-glyphicon">
+                <a ng-click="model.widgetList()">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div> Widget Edit
+        </h2>
+    </div>
+</div>
+
+<! -- HEADING END -->
+
+
+<div ng-switch="model.widget.type">
+    <div ng-switch-when="HEADER">
+        <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <ng-include src="'views/widget/widget-image.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <ng-include src="'views/widget/widget-youtube.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="HTML">
+        <ng-include src="'views/widget/widget-html.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="INPUT">
+        Text
+        <input ng-model="model.widget.text" class="form-control"/>
+        Rows
+        <input ng-model="model.widget.rows" class="form-control" type="number"/>
+        Placeholder
+        <input ng-model="model.widget.placeholder" class="form-control"/>
+        Formatted
+        <input ng-model="model.widget.formatted" type="checkbox"/>
+    </div>
+</div>
+
+
+<!-- BOTTOM -->
+
+<div class="sticky-footer">
+    <div class="container-fluid">
+        <h2><div class="right-side-glyphicon">
+            <a ng-click="model.profile()">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div></h2>
+    </div>
+</div>
+
+<!-- BOTTOM END -->

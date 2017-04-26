@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+
+
+<!--&lt;!&ndash; HEADING &ndash;&gt;-->
+
+<!--<div class="sticky-header">-->
+    <!--<div class="container-fluid">-->
+        <!--<h2 class="white-color">-->
+            <!--<div class="right-side-glyphicon">-->
+                <!--<a ng-click="model.updateWidget()">-->
+                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="left-side-glyphicon">-->
+                <!--<a ng-click="model.widgetList()">-->
+                    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+                <!--</a>-->
+            <!--</div> Widget Edit-->
+        <!--</h2>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<! &#45;&#45; HEADING END &ndash;&gt;-->
+
+
+
+<div class="container">
+
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input ng-model="model.widget.name"
+                   class="form-control" type="text" id="name" placeholder="Name"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <input ng-model="model.widget.text" class="form-control" rows="1" id="text" placeholder="Text"></input>
+        </div>
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input ng-model="model.widget.url"
+                   class="form-control" type="url" id="url" placeholder="URL"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="width">Width</label>
+            <input ng-model="model.widget.width"
+                   class="form-control" type="text" id="width" placeholder="100%"></input>
+        </div>
+
+
+
+    </form>
+
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWidget()">Delete</a>
+
+</div>
+
+
+
+<!--&lt;!&ndash; BOTTOM &ndash;&gt;-->
+
+<!--<div class="sticky-footer">-->
+    <!--<div class="container-fluid">-->
+        <!--<h2><div class="right-side-glyphicon">-->
+            <!--<a ng-click="model.profile()">-->
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+            <!--</a>-->
+        <!--</div></h2>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; BOTTOM END &ndash;&gt;-->

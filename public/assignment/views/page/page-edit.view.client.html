@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+
+
+
+<!-- HEADING -->
+<div class="sticky-header">
+    <div class="col-xs-4 hidden-xs">
+        <div class="container-fluid">
+            <h2 class="white-color">
+                <div class="right-side-glyphicon">
+                    <a ng-click="model.newPage()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <div class="left-side-glyphicon">
+                    <a ng-click="model.websiteList()">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </div> Pages
+            </h2>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+        <div class="container-fluid">
+            <h2 class="white-color">
+                <div class="right-side-glyphicon">
+                    <a ng-click="model.updatePage()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                </div>
+                <div class="left-side-glyphicon">
+                    <a ng-click="model.pages()">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </div> Edit Page
+            </h2>
+        </div>
+    </div>
+</div>
+
+<! -- HEADING END -->
+
+<!-- Page List -->
+<div class="col-xs-4 hidden-xs">
+    <div class="container-fluid">
+
+        <div ng-repeat="page in model.pages">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <a ng-click="model.widget(page._id)">{{page.name}}</a>
+                    </td>
+                    <td class="right-side-glyphicon">
+                        <a ng-click="model.editPage(page._id)">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Page List End -->
+
+
+
+<div class="col-xs-12 col-sm-8">
+    <div class="container-fluid">
+
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input ng-model="model.page.name"
+                       class="form-control" type="text" id="name" placeholder="Page Name">Blog Post</input>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input ng-model="model.page.title"
+                       class="form-control" type="text" id="title" placeholder="Page Title"></textarea>
+
+            </div>
+
+        </form>
+
+        <a ng-click="model.deletePage()" class="btn btn-danger btn-block">Delete</a>
+    </div>
+</div>
+
+
+<!-- BOTTOM -->
+
+<div class="sticky-footer">
+    <div class="container-fluid">
+        <h2><div class="right-side-glyphicon">
+            <a ng-click="model.profile()">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div></h2>
+    </div>
+</div>
+
+<!-- BOTTOM END -->
+

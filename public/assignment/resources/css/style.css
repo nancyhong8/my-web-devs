@@ -1,0 +1,89 @@
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+table {
+    width: 100%
+}
+
+li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: large;
+}
+
+.white-color { color: white; }
+.fixed-border {
+    position:fixed;
+}
+
+.sticky-header {
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+}
+
+
+.sticky-footer {
+    background-color: black;
+    color: white;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+}
+
+.right-side-glyphicon {
+    float: right;
+}
+
+.left-side-glyphicon {
+    float: left;
+}
+
+table {
+    width: 100%;
+}
+/*.youtube-widget {*/
+    /*position: relative;*/
+    /*padding-bottom: 56.25%; !* 16:9 *!*/
+    /*height: 0;*/
+/*}*/
+/*!*.youtube-widget iframe {*!*/
+    /*!*position: absolute;*!*/
+    /*!*top: 0;*!*/
+    /*!*left: 0;*!*/
+    /*!*width: 100%;*!*/
+    /*!*height: 100%;*!*/
+/*!*}*!*/
+
+/*.youtube-widget {*/
+    /*position: relative;*/
+    /*padding-bottom: 47.8%;*/
+    /*padding-top: 30px;*/
+    /*height: 0;*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*.youtube-widget iframe{*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+/*}*/
