@@ -48,11 +48,11 @@ a {
     opacity: 0.5;
 }
 
-.col-xs-4 {
+
+.white-background {
     background-color: white;
     color: black;
     padding: 20px;
-
 }
 
 table {
@@ -100,3 +100,32 @@ td {
 /*height:20px;*/
 /*width: 100px;*/
 /*}*/
+
+.shopping-cart {
+    width: 750px;
+    height: 423px;
+    margin: 80px auto;
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.left-side {
+    float: left;
+    width: 30%;
+}
+.right-side {
+    float: right;
+    width: 70%;
+}
+.left-side-small {
+    float: left;
+    width: 20%;
+}
+.right-side-big {
+    float: right;
+    width: 80%;
+}

@@ -15,6 +15,7 @@
         vm.viewProduct = viewProduct;
         vm.remove = remove;
         vm.checkout = checkout;
+        vm.viewProduct = viewProduct;
         var products;
 
 
@@ -110,6 +111,9 @@
                     console.log(error);
                 })
 
+        }
+        function viewProduct(pid) {
+            $location.url("/user/" + userId + "/product/" + pid);
         }
 
     }

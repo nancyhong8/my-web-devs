@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<div class="container fluid">
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -35,11 +34,9 @@
     <h1>{{model.profile.firstName}}'s Profile</h1>
 
 
-
-
     <div class="container-fluid">
 
-        <div class="col-xs-3">
+        <div class="left-side-small">
             <div class="modal-content">
                 <div class="modal-body">
                     <h4>{{model.profile.firstName}} {{model.profile.lastName}}</h4>
@@ -52,41 +49,43 @@
 
         </div>
 
-        <div class="col-xs-13">
+        <div class="container-fluid">
+
+        <div class="right-side-big">
+
 
             <h4>Products {{model.profile.firstName}} is selling</h4>
 
-            <div ng-show="model.noProducts">
-                {{model.noProducts}}
-            </div>
-<div class="divided-side">
-    <div ng-repeat="product in model.products">
-        <table>
-            <tr>
-                <td>
-                    <img ng-src="{{product.url}}" width="80%" height="130px"/>
-                </td>
-                <td>
-                    <a ng-click="model.viewProduct(product._id)">
-                        {{product.name}}
-                    </a>
-                </td>
-                <td>
-                    Price: ${{product.price}}
-                </td>
+                <table ng-repeat="product in model.products">
+                    <tr>
+                        <td>
+                            <img ng-src="{{product.url}}" width="80%" height="130px"/>
+                        </td>
+                        <td>
+                            <a ng-click="model.viewProduct(product._id)">
+                                {{product.name}}
+                            </a>
+                        </td>
+                        <td>
+                            Price: ${{product.price}}
 
-                <td>
-                    <button ng-show="model.user.roles.includes('ADMIN') || model.user._id == model.profileId" ng-click="model.remove(product)" type="reset" class="btn btn-default">Remove</button>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+                        </td>
+                        <td>
+                            <button ng-show="model.user.roles.includes('ADMIN') || model.user._id == model.profileId" ng-click="model.remove(product)" type="reset" class="btn btn-default">Remove</button>
 
+                        </td>
+                    </tr>
+                </table>
+
+                <div ng-show="model.noProducts">
+                    {{model.noProducts}}
+                </div>
+        </div>
         </div>
 
 
 
+
     </div>
 
-</div>
+
