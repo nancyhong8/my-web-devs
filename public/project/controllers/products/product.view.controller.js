@@ -90,7 +90,7 @@
         }
 
         function profile() {
-            $location.url("/user/" + uid);
+            $location.url("/user/profile");
         }
         function logout() {
             var promise = UserService.logout();

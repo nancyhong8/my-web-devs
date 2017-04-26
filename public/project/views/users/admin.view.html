@@ -5,9 +5,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a ng-click="model.profile()">Profile</a></li>
+            </ul>
             <ul ng-show='model.user.roles.indexOf("SELLER") > -1' class="nav navbar-nav">
                 <li><a ng-click="model.createProduct()">Sell A Plant</a></li>
             </ul>
+
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="model.cart()">My Cart({{model.cartSize}})</a></li>

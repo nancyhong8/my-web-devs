@@ -42,7 +42,7 @@
         }
 
         function profile() {
-            $location.url("/user/" + uid);
+            $location.url("/user/profile");
         }
 
         function product() {

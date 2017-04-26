@@ -30,7 +30,7 @@
 
 
         function profile() {
-            $location.url("/user/" + userId);
+            $location.url("/user/profile")
         }
 
         function createProduct() {

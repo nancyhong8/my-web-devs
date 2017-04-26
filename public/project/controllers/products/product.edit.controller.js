@@ -50,7 +50,7 @@
             $location.url("/user/" + uid + "/cart");
         }
         function profile() {
-            $location.url("/user/" + uid);
+            $location.url("/user/profile");
         }
 
 

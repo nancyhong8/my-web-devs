@@ -18,6 +18,7 @@
         vm.cart = cart;
         vm.editUser = editUser;
         vm.createUser = createUser;
+        vm.profile = profile;
 
         function init() {
             var promise = UserService.findAllUsers()
@@ -62,6 +63,9 @@
         }
         function createUser() {
             $location.url("/user/register");
+        }
+        function profile() {
+            $location.url("/user/profile")
         }
 
     }

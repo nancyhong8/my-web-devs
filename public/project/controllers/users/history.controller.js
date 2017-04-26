@@ -85,7 +85,7 @@
                 })
         }
         function profile() {
-            $location.url("/user/" + userId);
+            $location.url("/user/profile")
         }
         function home() {
             $location.url("/user/" + userId + "/home");

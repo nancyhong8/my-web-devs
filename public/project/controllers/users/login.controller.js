@@ -9,6 +9,7 @@
         vm.welcome = welcome;
         vm.user = {};
 
+        vm.image = $sce.trustAsResourceUrl("http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2015/01/power-from-plants.jpg")
 
         function login() {
             var promise = UserService.login(vm.user);
