@@ -28,6 +28,14 @@
                     currentUser: checkLogin
                 }
             })
+            .when("/user/profile/:uid", {
+                templateUrl: "views/users/profile.view.html",
+                controller: "profileAdminEditController",
+                controllerAs: "model",
+                resolve: {
+                    adminUser: checkAdmin
+                }
+            })
             .when("/user/:uid/message/:to", {
                 templateUrl: "views/users/message.view.html",
                 controller: "messageController",

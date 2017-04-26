@@ -16,6 +16,7 @@
         vm.remove = remove;
         vm.cart = cart;
         vm.contact = contact;
+        vm.createProduct = createProduct;
 
 
         function init() {
@@ -106,6 +107,9 @@
         }
         function contact() {
             $location.url("/user/" + userId + "/message/" + profileId);
+        }
+        function createProduct() {
+            $location.url("/user/" + userId + "/product");
         }
     }
 

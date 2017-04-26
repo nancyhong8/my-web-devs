@@ -1,24 +1,33 @@
 (function() {
     angular
         .module("WebAppMaker")
-        .controller("profileController", profileController);
+        .controller("profileAdminEditController", profileAdminEditController);
 
-    function profileController(currentUser, $location, $routeParams, UserService, $rootScope) {
+    function profileAdminEditController(adminUser, $location, $routeParams, UserService, $rootScope) {
         var vm = this;
-    //    var userId = $routeParams["uid"];
+        var userId = $routeParams["uid"];
         vm.home = home;
         vm.update = update;
         vm.logout = logout;
         vm.history = history;
-        vm.user = currentUser;
-        vm.cartSize = vm.user.cart.length;
+        vm.cartSize = adminUser.cart.length;
         vm.cart = cart;
         vm.deleteUser = deleteUser;
         vm.inbox = inbox;
         vm.viewProfile = viewProfile;
         vm.createProduct = createProduct;
-        var userId = vm.user._id;
 
+        function init() {
+            var promise = UserService.findUserById(userId);
+            promise
+                .then(function(user) {
+                    vm.user = user.data;
+                    var userId = vm.user._id;
+                }, function(error) {
+                    console.log(error);
+                })
+        }
+        init();
         // updates user
         function update() {
             // handling the role of the user
@@ -30,7 +39,7 @@
                     vm.user.roles.push(vm.role);
                 }
             }
-            var promise = UserService.updateMe(vm.user._id, vm.user);
+            var promise = UserService.updateUser(vm.user._id, vm.user);
             promise
                 .then(function(user) {
                     vm.message = "Successfully updated user"
@@ -51,31 +60,30 @@
                 })
         }
         function home() {
-            $location.url("/user/" + userId + "/home");
+            $location.url("/user/" + adminUser._id + "/home");
         }
         function history() {
             $location.url("/user/" + userId + "/history");
         }
         function cart() {
-            $location.url("/user/" + userId + "/cart");
+            $location.url("/user/" + adminUser._id + "/cart");
         }
         function deleteUser() {
-            UserService.deleteMe(userId)
-                .then(function(result) {
-                    logout();
-                    $location.url("/welcome");
-                }, function(error) {
-                    console.log(error);
-                })
+                    UserService.deleteUser(userId)
+                        .then(function(result) {
+                            $location.url("/admin/all");
+                        }, function(error) {
+                            console.log(error);
+                        })
         }
         function inbox() {
-            $location.url("/user/" + userId + "/inbox");
+            $location.url("/user/" + adminUser._id + "/inbox");
         }
         function viewProfile() {
             $location.url("/user/" + userId + "/view");
         }
         function createProduct() {
-            $location.url("/user/" + userId + "/product");
+            $location.url("/user/" + adminUser._id + "/product");
         }
     }
 })();

@@ -56,7 +56,7 @@
                 })
         }
         function editUser(userId) {
-            $location.url("/user/" + userId);
+            $location.url("/user/profile/" + userId);
         }
         function viewUser(uid) {
             $location.url("/user/" + uid + "/view");
@@ -65,7 +65,7 @@
             $location.url("/user/register");
         }
         function profile() {
-            $location.url("/user/profile")
+            $location.url("/user/profile");
         }
 
     }

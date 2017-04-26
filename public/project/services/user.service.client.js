@@ -71,7 +71,7 @@
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/user/"+userId, user);
+            return $http.put("/api/admin/user/"+userId, user);
         }
         function findAllProducts() {
             return $http.get("/api/products");
