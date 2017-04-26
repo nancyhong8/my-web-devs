@@ -18,6 +18,7 @@ module.exports = function(app) {
         //     successRedirect: 'project/index.html#!/user/profile',
         //     failureRedirect: 'project/index.html#!/user/login'
         // }));
+    );
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get   ('/api/loggedIn', loggedin);
