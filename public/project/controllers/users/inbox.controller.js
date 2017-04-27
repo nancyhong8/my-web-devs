@@ -24,6 +24,10 @@
                 .then(function(user) {
                     vm.user = user.data;
                     vm.messages = vm.user.inbox;
+                    if(vm.messages.length < 1) {
+                        vm.noMessage = "There are no message in your inbox";
+                    }
+                    vm.cartSize = vm.user.cart.length;
                 }, function(err) {
                     console.log(err)
                 })

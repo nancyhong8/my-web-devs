@@ -40,40 +40,79 @@ module.exports = function(app) {
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID || "283364938783133",
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET || "a915e8a6f8fabec439666a09af4db491",
-        //callbackURL  : "http://localhost:3500/auth/facebook/callback"
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL
-        //|| "http://localhost:3500/auth/facebook/callback"
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:3500/auth/facebook/callback"
     };
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
     function facebookStrategy(token, refreshToken, profile, done) {
+        console.log(1);
+        console.log(profile);
         userModel
-            .findUserByFacebookId(profile.id)
-            .then(function(user) {
-                if(user) {
-                    return done(null, user);
-                }
-                else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
-                    var newFacebookUser = {
-                        username: emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName: profile.name.familyName,
-                        email: email,
-                        facebook: {
-                            id: profile.id,
-                            token: token
-                        }
+            .findUserByFacebookId(profile._id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newFacebookUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            facebook: {
+                                id:    profile._id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newFacebookUser);
                     }
-                    return userModel.createUser(newFacebookUser)
+                },
+                function(err) {
+                    if (err) { return done(err); }
                 }
-            }, function(error) {
-                if(error) {
-                    return done(error);
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
                 }
-            })
+            );
+
+
+
+
+        // userModel
+        //     .findUserByFacebookId(profile.id)
+        //     .then(function(user) {
+        //         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        //         if(user) {
+        //             return done(null, user);
+        //         }
+        //         else {
+        //             var email = profile.emails[0].value;
+        //             var emailParts = email.split("@");
+        //             var newFacebookUser = {
+        //                 username: emailParts[0],
+        //                 firstName: profile.name.givenName,
+        //                 lastName: profile.name.familyName,
+        //                 email: email,
+        //                 facebook: {
+        //                     id: profile.id,
+        //                     token: token
+        //                 }
+        //             }
+        //             return userModel.createUser(newFacebookUser)
+        //         }
+        //     }, function(error) {
+        //         if(error) {
+        //             return done(error);
+        //         }
+        //     })
     }
 
 

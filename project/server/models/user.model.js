@@ -7,23 +7,24 @@ var userModel = mongoose.model('shoppingUserModel', userSchema);
 
 
 function createUser(user) {
-    var deferred = q.defer();
-
-    userModel.create({
-        'username': user.username,
-        'firstName': user.firstName,
-        'lastName': user.lastName,
-        'email': user.email,
-        'password': user.password,
-        'roles': user.roles,
-        'description': user.description
-    }, function(err, user) {
-        if(user) {
-            deferred.resolve(user);
-        }
-    });
-
-    return deferred.promise;
+    // var deferred = q.defer();
+    //
+    // userModel.create({
+    //     'username': user.username,
+    //     'firstName': user.firstName,
+    //     'lastName': user.lastName,
+    //     'email': user.email,
+    //     'password': user.password,
+    //     'roles': user.roles,
+    //     'description': user.description
+    // }, function(err, user) {
+    //     if(user) {
+    //         deferred.resolve(user);
+    //     }
+    // });
+    //
+    // return deferred.promise;
+    return userModel.create(user);
 }
 
 

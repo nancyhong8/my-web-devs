@@ -62,28 +62,36 @@
 
             <div class="form-group">
                 <label class="col-lg-2 control-label">Picture</label>
-                <div class="col-lg-5">
-                    <img ng-src="{{model.product.url}}" width="100%">
-                </div>
-                <div class="col-lg-5">
 
-                    <form action="/api/test"   method="post" enctype="multipart/form-data" style="display: none">
-                        <button type="submit" class="btn btn-block btn-primary" style="display: none">Upload Image</button>
-                    </form>
-                    <form action="/api/upload/edit" method="post" enctype="multipart/form-data">
-                        <input  name="myFile" type="file" class="form-control"/>
-                        <input  name="id"     value="{{model.product._id}}" style="display: none"/>
-                        <input  name="name"     value="{{model.product.name}}" style="display: none"/>
-                        <input  name="quantity"    value="{{model.product.quantity}}"   style="display: none"/>
-                        <input  name="price" value="{{model.product.price}}"   style="display: none"/>
-                        <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
-                        <input  name="seller"  value="{{model.seller}}"   style="display: none"/>
-                        <button type="submit" class="btn btn-block btn-primary">Save Changes</button>
-                        <button ng-click="model.deleteProduct()" type="reset" class="btn btn-danger btn-block">Delete Product</button>
-                        <button ng-click="model.home()" type="reset" class="btn btn-default btn-block">Cancel</button>
+                    <div class="left-side">
+                        <div class="container-fluid">
 
-                    </form>
+                        <img ng-src="{{model.product.url}}" width="100%">
+                    </div>
                 </div>
+
+                    <div class="right-side">
+                        <div class="container-fluid">
+
+                        <form action="/api/test"   method="post" enctype="multipart/form-data" style="display: none">
+                            <button type="submit" class="btn btn-block btn-primary" style="display: none">Upload Image</button>
+                        </form>
+                        <form action="/api/upload/edit" method="post" enctype="multipart/form-data">
+                            <input  name="myFile" type="file" class="form-control"/>
+                            <input  name="id"     value="{{model.product._id}}" style="display: none"/>
+                            <input  name="name"     value="{{model.product.name}}" style="display: none"/>
+                            <input  name="quantity"    value="{{model.product.quantity}}"   style="display: none"/>
+                            <input  name="price" value="{{model.product.price}}"   style="display: none"/>
+                            <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
+                            <input  name="seller"  value="{{model.seller}}"   style="display: none"/>
+                            <button type="submit" class="btn btn-block btn-primary">Save Changes</button>
+                            <button ng-click="model.deleteProduct()" type="reset" class="btn btn-danger btn-block">Delete Product</button>
+                            <button ng-click="model.home()" type="reset" class="btn btn-default btn-block">Cancel</button>
+
+                        </form>
+                    </div>
+                </div>
+
 
 
 
