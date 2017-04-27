@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c754497f-a385-42db-9fd2-7085a4d7fa80" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/server/models/user.model.js" afterPath="$PROJECT_DIR$/project/server/models/user.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/server/service/user.service.server.js" afterPath="$PROJECT_DIR$/project/server/service/user.service.server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -441,15 +438,15 @@
       <workItem from="1492888260909" duration="3111000" />
       <workItem from="1492892103517" duration="3628000" />
       <workItem from="1492973821315" duration="26849000" />
-      <workItem from="1493232704738" duration="7820000" />
+      <workItem from="1493232704738" duration="8236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234378000" />
+    <option name="totallyTimeSpent" value="234794000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
+    <frame x="-16" y="-16" width="3232" height="1732" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20888889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
