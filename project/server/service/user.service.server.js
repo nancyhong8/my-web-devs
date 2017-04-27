@@ -49,21 +49,20 @@ module.exports = function(app) {
         console.log(1);
         console.log(profile);
         userModel
-            .findUserByFacebookId(profile._id)
+            .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
                     if(user) {
+                        console.log('!!!!!!!!!!');
+                        console.log(user);
                         return done(null, user);
                     } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
                         var newFacebookUser = {
-                            username:  emailParts[0],
+                            username:  profile.displayName,
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
-                            email:     email,
                             facebook: {
-                                id:    profile._id,
+                                id:    profile.id,
                                 token: token
                             }
                         };

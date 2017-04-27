@@ -126,7 +126,21 @@ function deleteUser(uid) {
 }
 
 function findUserByFacebookId(facebookId) {
-    return userModel.findOne({'facebook.id': facebookId});
+    console.log("facebookId: " + facebookId);
+    var deferred = q.defer();
+    userModel.findOne({'facebook.id': facebookId}, function(err, user) {
+        if(user) {
+            console.log("from model");
+            console.log(facebookId);
+            console.log(user);
+            deferred.resolve(user);
+        }
+        else {
+            console.log(err);
+            deferred.resolve(err);
+        }
+    });
+    return deferred.promise;
 }
 
 function findUserByUsername(username) {
