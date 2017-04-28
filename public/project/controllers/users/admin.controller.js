@@ -7,7 +7,6 @@
 
         var vm = this;
 
-
         vm.user = adminUser;
         var uid = vm.user._id;
         vm.cartSize = vm.user.cart.length;
@@ -40,6 +39,7 @@
                     console.log(error);
                 })
         }
+
         function home() {
             $location.url("/user/" + uid + "/home");
         }
@@ -55,6 +55,7 @@
                     console.log(error);
                 })
         }
+
         function editUser(userId) {
             $location.url("/user/profile/" + userId);
         }

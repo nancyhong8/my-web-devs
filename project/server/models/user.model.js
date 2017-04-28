@@ -7,34 +7,24 @@ var userModel = mongoose.model('shoppingUserModel', userSchema);
 
 
 function createUser(user) {
-    // var deferred = q.defer();
-    //
-    // userModel.create({
-    //     'username': user.username,
-    //     'firstName': user.firstName,
-    //     'lastName': user.lastName,
-    //     'email': user.email,
-    //     'password': user.password,
-    //     'roles': user.roles,
-    //     'description': user.description
-    // }, function(err, user) {
-    //     if(user) {
-    //         deferred.resolve(user);
-    //     }
-    // });
-    //
-    // return deferred.promise;
-    return userModel.create(user);
+    var deferred = q.defer();
+    userModel.create({
+        'username': user.username,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
+        'email': user.email,
+        'password': user.password,
+        'roles': user.roles,
+        'description': user.description,
+        'facebook': user.facebook
+    }, function(err, user) {
+        if(user) {
+            deferred.resolve(user);
+        }
+    });
+
+    return deferred.promise;
 }
-
-
-// function findUserByCredentials(username, password) {
-//     var deferred = q.defer();
-//     userModel.findOne({'username': username, 'password': password}, function(err, user) {
-//         deferred.resolve(user);
-//     });
-//     return deferred.promise;
-// }
 
 function findUserById(userId) {
     var deferred = q.defer();
@@ -86,6 +76,7 @@ function addToCart(userId, product) {
 
     return deferred.promise;
 }
+
 function addToProductSelling(uid, product) {
     var deferred = q.defer();
     userModel.findByIdAndUpdate(uid,
@@ -130,9 +121,6 @@ function findUserByFacebookId(facebookId) {
     var deferred = q.defer();
     userModel.findOne({'facebook.id': facebookId}, function(err, user) {
         if(user) {
-            console.log("from model");
-            console.log(facebookId);
-            console.log(user);
             deferred.resolve(user);
         }
         else {
@@ -173,18 +161,14 @@ function sendMessage(userId, message) {
 }
 
 userModel.createUser = createUser;
-// userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserById = findUserById;
 userModel.updateUser = updateUser;
 userModel.addToCart = addToCart;
-// userModel.removeFromCart = removeFromCart;
 userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
 userModel.addToProductSelling = addToProductSelling;
 userModel.sendMessage = sendMessage;
-// userModel.findUserByUsername = findUserByUsername;
-
 
 module.exports = userModel;

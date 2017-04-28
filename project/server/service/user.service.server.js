@@ -2,7 +2,6 @@
 module.exports = function(app) {
 
     var passport      = require('passport');
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var userModel = require('../models/user.model.js');
     var productModel = require('../models/product.model.js');
     var bcrypt = require("bcrypt-nodejs");
@@ -20,41 +19,37 @@ module.exports = function(app) {
     app.get   ('/api/loggedIn', loggedin);
     app.post  ('/api/logout', logout);
     app.post  ('/api/register', register);
-    app.post  ('/api/isAdmin',        isAdmin);
+    app.post  ('/api/isAdmin', isAdmin);
     app.get   ('/api/admin/user', checkAdmin, findAllUsers);
     app.delete('/api/user/admin/:uid', checkAdmin, deleteUser);
     app.delete('/api/user/:uid/delete', checkSameUser, deleteUser);
     app.put   ('/api/admin/user/:uid', checkAdmin, updateUser);
     app.put   ('/api/user/:uid', checkSameUser, updateUser);
-    app.get("/api/products", findAllProducts);
-    app.get("/api/products/:uid", checkSameUser, findProductsByUser);
-    app.put("/api/user/:uid/add-product", checkSameUser, addToCart);
-    app.get("/api/user/find/:uid", findUserById);
-    app.put("/api/user/message/:uid", sendMessage);
-    // app.put("/api/user/remove/cart/:uid", removeFromCart);
+    app.get   ("/api/products", findAllProducts);
+    app.get   ("/api/products/:uid", checkSameUser, findProductsByUser);
+    app.put   ("/api/user/:uid/add-product", checkSameUser, addToCart);
+    app.get   ("/api/user/find/:uid", findUserById);
+    app.put   ("/api/user/message/:uid", sendMessage);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID || "283364938783133",
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET || "a915e8a6f8fabec439666a09af4db491",
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:3500/auth/facebook/callback"
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL
     };
+
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        console.log(1);
-        console.log(profile);
         userModel
             .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
                     if(user) {
-                        console.log('!!!!!!!!!!');
-                        console.log(user);
                         return done(null, user);
                     } else {
                         var newFacebookUser = {
@@ -81,42 +76,10 @@ module.exports = function(app) {
                     if (err) { return done(err); }
                 }
             );
-
-
-
-
-        // userModel
-        //     .findUserByFacebookId(profile.id)
-        //     .then(function(user) {
-        //         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        //         if(user) {
-        //             return done(null, user);
-        //         }
-        //         else {
-        //             var email = profile.emails[0].value;
-        //             var emailParts = email.split("@");
-        //             var newFacebookUser = {
-        //                 username: emailParts[0],
-        //                 firstName: profile.name.givenName,
-        //                 lastName: profile.name.familyName,
-        //                 email: email,
-        //                 facebook: {
-        //                     id: profile.id,
-        //                     token: token
-        //                 }
-        //             }
-        //             return userModel.createUser(newFacebookUser)
-        //         }
-        //     }, function(error) {
-        //         if(error) {
-        //             return done(error);
-        //         }
-        //     })
     }
 
 
     function localStrategy(username, password, done) {
-
         userModel.findUserByUsername(username)
             .then(function(user) {
                 if(user && bcrypt.compareSync(password, user.password)) {
@@ -136,6 +99,7 @@ module.exports = function(app) {
             res.sendStatus(401);
         }
     }
+
     function checkAdmin(req, res, next) {
         if(req.user && req.user.roles.includes('ADMIN')) {
             next();
@@ -268,6 +232,7 @@ module.exports = function(app) {
                 console.log(err);
             })
     }
+
     function sendMessage(req, res) {
         var userId = req.params['uid'];
         var message = req.body;

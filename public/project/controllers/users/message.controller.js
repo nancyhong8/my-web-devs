@@ -41,6 +41,7 @@
                     console.log(error);
                 })
         }
+
         function viewProfile() {
             $location.url("/user/profile")
         }
@@ -51,6 +52,7 @@
         function cart() {
             $location.url("/user/" + userId + "/cart");
         }
+
         function send() {
             console.log(vm.recipient._id)
             var message = {

@@ -69,8 +69,6 @@
             console.log(products);
         }
 
-
-
         function viewProduct(pid) {
             $location.url("/user/" + userId + "/product/" + pid);
         }
@@ -86,12 +84,14 @@
                     console.log(error);
                 })
         }
+
         function viewProfile() {
             $location.url("/user/profile")
         }
         function home() {
             $location.url("/user/" + userId + "/home");
         }
+
         function remove(product) {
             vm.profile.productSelling.splice(vm.profile.productSelling.indexOf(product), 1);
             var promise = UserService.updateUser(profileId, vm.profile);
@@ -102,6 +102,7 @@
                     console.log(error);
                 })
         }
+
         function cart() {
             $location.url("/user/" + userId + "/cart");
         }

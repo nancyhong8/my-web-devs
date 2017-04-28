@@ -45,8 +45,6 @@
                 })
         }
 
-
-
         function logout() {
             var promise = UserService.logout();
             promise

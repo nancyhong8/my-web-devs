@@ -1,23 +1,16 @@
 
 module.exports = function(app) {
 
-
     app.post("/api/product", createProduct);
     app.get("/api/product/view/:pid", findProductById);
     app.delete("/api/product/delete/:pid", deleteProduct);
-    // app.get("/api/user", findUserByCredentials);
-    // app.get("/api/user/:uid", findUserById);
-    // app.put("/api/user/:uid", updateUser);
-    // // app.delete("/api/user/:uid", deleteUser);
-    //
 
     var productModel = require('../models/product.model.js');
     var userModel = require('../models/user.model.js');
 
-
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../../public/project/resources/uploads' });
-   // app.post("/api/upload",  uploadImage);
+
     app.post("/api/upload", upload.single("myFile"), uploadImage)
     app.post("/api/upload/edit", upload.single("myFile"), changeImage);
 
@@ -41,9 +34,7 @@ module.exports = function(app) {
 
         productModel.editProduct(product)
             .then(function(product) {
-              //  res.redirect("/#!\/user\/" + seller + "\/home");
                 res.redirect("/project\/index.html#!\/user\/" + seller + "\/home");
-
             }, function(error) {
                 console.log(error);
             })

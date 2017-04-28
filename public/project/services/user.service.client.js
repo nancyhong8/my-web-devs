@@ -12,22 +12,16 @@
             "loggedIn": loggedIn,
             "logout": logout,
             "findProductsByUser": findProductsByUser,
-            // "removeFromCart": removeFromCart,
             "isAdmin": isAdmin,
             "findAllUsers": findAllUsers,
             "deleteUser": deleteUser,
             "updateMe": updateMe,
             "deleteMe": deleteMe,
             "sendMessage": sendMessage,
-
-
-            // "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "findAllProducts": findAllProducts,
             "findProductById": findProductById
-            // "deleteUser": deleteUser,
-            // "findUser" : findUser
         };
         return api;
 
@@ -46,9 +40,7 @@
         function logout() {
             return $http.post("/api/logout");
         }
-        // function removeFromCart(uid, product) {
-        //     return $http.put("/api/user/remove/cart/" + uid, product);
-        // }
+
         function isAdmin() {
             return $http.post("/api/isAdmin");
         }
@@ -61,9 +53,6 @@
         function deleteMe(uid) {
             return $http.delete("/api/user/" + uid + "/delete");
         }
-
-
-
 
         function findUserByCredentials(email, password) {
             return $http.get("/api/user?email="+email+"&password="+password);
@@ -90,22 +79,6 @@
         function sendMessage(uid, message) {
             return $http.put("/api/user/message/" + uid, message);
         }
-        // function findUserByUsername(username) {
-        //     return $http.get("/api/user?username="+username);
-        // }
-
-
-        //
-        // function findUser() {
-        //     return $http.get("/api/user");
-        // }
-        //
-
-        //
-        // function deleteUser(userId) {
-        //     return $http.delete("/api/user/"+userId);
-        //
-        // }
 
     }
 })();

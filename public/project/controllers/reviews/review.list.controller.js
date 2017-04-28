@@ -43,8 +43,6 @@
                 }, function(err) {
                     console.log(err);
                 })
-
-
         }
         init();
 
@@ -97,8 +95,6 @@
                 return $sce.trustAsResourceUrl('/../../project/resources/stars/star-5.jpg');
             }
         }
-
-
 
     }
 })();

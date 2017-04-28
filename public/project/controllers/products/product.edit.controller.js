@@ -34,8 +34,6 @@
         }
         init();
 
-
-
         function logout() {
             var promise = UserService.logout();
             promise
@@ -52,10 +50,6 @@
         function profile() {
             $location.url("/user/profile");
         }
-
-
-
-
         function home() {
             $location.url("/user/" + uid + "/home");
         }

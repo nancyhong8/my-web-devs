@@ -93,6 +93,7 @@
         function review(product) {
             $location.url("/user/" + userId + "/product/" + product._id + "/review")
         }
+
         function remove(product) {
             vm.user.productBought.splice(vm.user.productBought.indexOf(product), 1);
             var promise = UserService.updateUser(userId, vm.user);
@@ -103,6 +104,7 @@
                     console.log(error);
                 })
         }
+
         function cart() {
             $location.url("/user/" + userId + "/cart");
         }

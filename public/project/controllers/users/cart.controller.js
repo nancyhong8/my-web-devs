@@ -61,10 +61,10 @@
         }
 
 
-
         function viewProduct(pid) {
             $location.url("/user/" + userId + "/product/" + pid);
         }
+
         function remove(product) {
             vm.user.cart.splice(vm.user.cart.indexOf(product), 1);
             var promise = UserService.updateUser(userId, vm.user);
@@ -79,6 +79,7 @@
         function createProduct() {
             $location.url("/user/" + userId + "/product");
         }
+
         function logout() {
             var promise = UserService.logout();
             promise
@@ -89,6 +90,7 @@
                     console.log(error);
                 })
         }
+
         function profile() {
             $location.url("/user/profile")
         }
@@ -98,6 +100,7 @@
         function history() {
             $location.url("/user/" + userId + "/history");
         }
+
         function checkout() {
             for(i = 0; i < products.length; i ++) {
                 vm.user.productBought.push(products[i]);
@@ -112,6 +115,7 @@
                 })
 
         }
+
         function viewProduct(pid) {
             $location.url("/user/" + userId + "/product/" + pid);
         }

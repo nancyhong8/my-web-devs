@@ -7,7 +7,6 @@ var productModel = mongoose.model('shoppingProductModel', productSchema);
 
 function createProduct(product) {
     var deferred = q.defer();
-
     productModel.create(
         product
     , function(err, user) {
@@ -15,14 +14,8 @@ function createProduct(product) {
             deferred.resolve(user);
         }
     });
-
     return deferred.promise;
 }
-
-function uploadPicture(product) {
-
-}
-
 
 function findAllProducts() {
     var deferred = q.defer();
@@ -65,7 +58,6 @@ function addReviewToProduct(pid, review) {
         });
 }
 
-
 function editProduct(product) {
     console.log(product);
     var deferred = q.defer();
@@ -94,7 +86,6 @@ function deleteProduct(pid) {
 
 
 productModel.createProduct = createProduct;
-productModel.uploadPicture = uploadPicture;
 productModel.findAllProducts = findAllProducts;
 productModel.findProductsByUser = findProductsByUser;
 productModel.findProductById = findProductById;

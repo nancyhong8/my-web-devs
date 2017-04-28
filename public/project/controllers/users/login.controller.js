@@ -9,8 +9,6 @@
         vm.welcome = welcome;
         vm.user = {};
 
-        // vm.image = $sce.trustAsResourceUrl("/../../resources/stars/power-from-plants.jpg")
-
         function login() {
             var promise = UserService.login(vm.user);
             promise
@@ -20,6 +18,7 @@
                     vm.error = "Login credentials not found";
                 })
         }
+
         function welcome() {
             console.log(vm.user);
             $location.url("/welcome");

@@ -28,7 +28,7 @@
                 })
         }
         init();
-        // updates user
+
         function update() {
             // handling the role of the user
             if(vm.role) {
@@ -59,6 +59,7 @@
                     console.log(error);
                 })
         }
+
         function home() {
             $location.url("/user/" + adminUser._id + "/home");
         }
@@ -68,6 +69,7 @@
         function cart() {
             $location.url("/user/" + adminUser._id + "/cart");
         }
+
         function deleteUser() {
                     UserService.deleteUser(userId)
                         .then(function(result) {
@@ -76,6 +78,7 @@
                             console.log(error);
                         })
         }
+
         function inbox() {
             $location.url("/user/" + adminUser._id + "/inbox");
         }

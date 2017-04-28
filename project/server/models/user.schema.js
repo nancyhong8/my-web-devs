@@ -7,7 +7,6 @@ module.exports = function() {
             'lastName': String,
             'email': String,
             'roles': [{type: String, enum: ['ADMIN', 'SELLER']}],
-            'address': String,
             'productSelling': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'productBought': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
             'cart': [{type: mongoose.Schema.Types.ObjectId, ref:'shoppingProductModel'}],
