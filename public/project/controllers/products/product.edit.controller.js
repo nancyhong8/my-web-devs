@@ -55,7 +55,6 @@
         }
 
         function deleteProduct() {
-            console.log(vm.user);
             if(vm.user.roles.includes('ADMIN') || vm.user._id == vm.seller) {
                 var promise = ProductService.deleteProduct(pid);
                 promise

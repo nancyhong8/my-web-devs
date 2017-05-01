@@ -35,23 +35,18 @@
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-2 control-label">Plant Name</label>
+                <label for="inputFirstName" class="col-lg-2 control-label">Plant Name</label>
                 <div class="col-lg-10">
                     <input ng-model="model.product.name" type="text" class="form-control" id="inputFirstName" placeholder="Plant Name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-2 control-label">Plant Description</label>
+                <label for="description" class="col-lg-2 control-label">Plant Description</label>
                 <div class="col-lg-10">
-                    <input ng-model="model.product.description" type="text" class="form-control" id="inputLastName" placeholder="Plant description">
+                    <input ng-model="model.product.description" type="text" class="form-control" id="description" placeholder="Plant description">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputEmail" class="col-lg-2 control-label">Quantity</label>
-                <div class="col-lg-10">
-                    <input ng-model="model.product.quantity" type="text" class="form-control" id="inputEmail" placeholder="5">
-                </div>
-            </div>
+
             <div class="form-group">
                 <label for="inputPrice" class="col-lg-2 control-label">Price (USD)</label>
                 <div class="col-lg-10">
@@ -84,7 +79,8 @@
                             <input  name="price" value="{{model.product.price}}"   style="display: none"/>
                             <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
                             <input  name="seller"  value="{{model.seller}}"   style="display: none"/>
-                            <button type="submit" class="btn btn-block btn-primary">Save Changes</button>
+                            <input name="url" value="{{model.product.url}}" style="display: none"/>
+                            <button type="submit" class="btn btn-block btn-primary">Update Product</button>
                             <button ng-click="model.deleteProduct()" type="reset" class="btn btn-danger btn-block">Delete Product</button>
                             <button ng-click="model.home()" type="reset" class="btn btn-default btn-block">Cancel</button>
 

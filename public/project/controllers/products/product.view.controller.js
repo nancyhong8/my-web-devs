@@ -73,7 +73,7 @@
             }
             else {
                 vm.rate = "No reviews yet"
-                vm.stars = $sce.trustAsResourceUrl('/../../resources/stars/star-0.jpg');
+                vm.stars = $sce.trustAsResourceUrl('/../../project/resources/stars/star-0.jpg');
             }
         }
 

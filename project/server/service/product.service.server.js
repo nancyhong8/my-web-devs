@@ -15,7 +15,6 @@ module.exports = function(app) {
     app.post("/api/upload/edit", upload.single("myFile"), changeImage);
 
     function changeImage(req, res) {
-        var filename = req.file.filename;
         var id = req.body.id;
         var name = req.body.name;
         var quantity = req.body.quantity;
@@ -29,7 +28,14 @@ module.exports = function(app) {
             'seller': seller,
             'description': description,
             'price': price,
-            'url' : '/project/resources/uploads/' + filename
+        }
+
+        if(req.file) {
+            var filename = req.file.filename;
+            product.url = '/project/resources/uploads/' + filename;
+        }
+        else {
+            product.url = req.body.url;
         }
 
         productModel.editProduct(product)
